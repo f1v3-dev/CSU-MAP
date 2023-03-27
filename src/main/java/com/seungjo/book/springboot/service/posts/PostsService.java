@@ -7,14 +7,14 @@ import com.seungjo.book.springboot.web.dto.PostsSaveRequestDto;
 import com.seungjo.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+
 import org.springframework.transaction.annotation.Transactional;
 
 @RequiredArgsConstructor
 @Service
 public class PostsService {
-
     private final PostsRepository postsRepository;
-
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {
