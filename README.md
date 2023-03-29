@@ -5,3 +5,5 @@
 - JAVA 8
 - JDK 1.8
 - Intellij
+
+> 책과 Gradle의 버전이 달라 compile -> implementation으로 작성
