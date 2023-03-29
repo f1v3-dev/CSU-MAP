@@ -26,14 +26,38 @@ public class OAuthAttributes {
         this.picture = picture;
     }
 
-    // 1.
-    public static OAuthAttributes of(String registrationId, String userNameAttributeName,
+    public static OAuthAttributes of(String registrationId,
+                                     String userNameAttributeName,
                                      Map<String, Object> attributes) {
+        // if문으로 naver 판단 코드 추가
+        if("naver".equals(registrationId)) {
+            return ofNaver("id", attributes);
+        }
+        return ofGoogle(userNameAttributeName, attributes);
+    }
+
+    // 1. Google 로그인
+    private static OAuthAttributes ofGoogle(String userNameAttributeName, Map<String, Object> attributes) {
         return OAuthAttributes.builder()
                 .name((String) attributes.get("name"))
                 .email((String) attributes.get("email"))
                 .picture((String) attributes.get("picture"))
                 .attributes(attributes)
+                .nameAttributeKey(userNameAttributeName)
+                .build();
+    }
+
+
+    // 2. Naver 로그인
+    private static OAuthAttributes ofNaver(String userNameAttributeName,
+                                           Map<String, Object> attributes) {
+        Map<String, Object> response = (Map<String, Object>)attributes.get("response");
+
+        return OAuthAttributes.builder()
+                .name((String) response.get("name"))
+                .email((String) response.get("email"))
+                .picture((String) response.get("profile_image"))
+                .attributes(response)
                 .nameAttributeKey(userNameAttributeName)
                 .build();
     }

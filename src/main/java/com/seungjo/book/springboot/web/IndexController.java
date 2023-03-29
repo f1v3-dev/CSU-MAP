@@ -1,5 +1,6 @@
 package com.seungjo.book.springboot.web;
 
+import com.seungjo.book.springboot.config.auth.LoginUser;
 import com.seungjo.book.springboot.config.auth.dto.SessionUser;
 import com.seungjo.book.springboot.service.posts.PostsService;
 import com.seungjo.book.springboot.web.dto.PostsResponseDto;
@@ -16,13 +17,12 @@ import javax.servlet.http.HttpSession;
 public class IndexController {
 
     private final PostsService postsService;
-    private final HttpSession httpSession;
-
+    
+    //@LoginUser를 사용하여 세션 정보를 가져옴
     @GetMapping("/")
-    public String index(Model model){
+    public String index(Model model, @LoginUser SessionUser user){
         model.addAttribute("posts", postsService.findAllDesc());
-
-        SessionUser user = (SessionUser) httpSession.getAttribute("user");
+        
         if (user != null) {
             model.addAttribute("userName", user.getName());
         }
