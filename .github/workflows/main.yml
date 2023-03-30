@@ -5,18 +5,19 @@
 # This workflow will build a package using Gradle and then publish it to GitHub packages when a release is created
 # For more information see: https://github.com/actions/setup-java/blob/main/docs/advanced-usage.md#Publishing-using-gradle
 
-env:
-  S3_BUCKET_NAME: seungjo-springboot-build # S3 버킷명
-  PROJECT_NAME: springboot-webservice # Github 프로젝트명
+  
+env:  
+  S3_BUCKET_NAME: seungjo-springboot-build
+  PROJECT_NAME: springboot-webservice
 
-name: deploy # Github Action에서 보여질 이름
+name: deploy    # GitHub Action에서 보여질 이름을 지정합니다. 
 
 on:
   release:
-    types: [push] # push시 자동으로 실행
+    types: [push]   # push시 자동으로 실행됩니다.
   push:
-    branches: [master] # master 브랜치에서 동작
-  workflow_dispatch: # 수동으로도 실행이 가능
+    branches: [master]    # main 브랜치에서 동작합니다.
+  workflow_dispatch:      # 수동으로도 실행이 가능합니다.
 
 jobs:
   build:
@@ -59,7 +60,7 @@ jobs:
       shell: bash
       
     - name: Configure AWS credentials
-      uses: aws-actions/configure-aws-credentials@v1      #(13)
+      uses: aws-actions/configure-aws-credentials@v1     
       with:
         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
