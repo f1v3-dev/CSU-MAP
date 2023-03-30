@@ -5,5 +5,7 @@
 - JAVA 8
 - JDK 1.8
 - Intellij
+- gradle 7.6.1
+- Spring Boot 2.1.7
 
-> 책과 Gradle의 버전이 달라 compile -> implementation으로 작성
+> `build.gradle` compile -> implementation으로 작성
