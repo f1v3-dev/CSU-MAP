@@ -11,6 +11,6 @@
 > `build.gradle` compile -> implementation으로 작성
 
 ---
-Commit : Github
-Build : Github Action
-Deploy : AWS - CodeDeploy
+- Commit : Github
+- Build : Github Action
+- Deploy : AWS - CodeDeploy
