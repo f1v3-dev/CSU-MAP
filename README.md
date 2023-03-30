@@ -14,3 +14,4 @@
 - Commit : Github
 - Build : Github Action
 - Deploy : AWS - CodeDeploy
+> Github Action으로 CI :(https://github.com/jojoldu/freelec-springboot2-webservice/issues/806)
