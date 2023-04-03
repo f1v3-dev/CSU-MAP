@@ -1,0 +1,29 @@
+{{>layout/header}}
+
+<h1>CSU Classroom Finder</h1>
+<div class="col-md-12">
+    <!-- 로그인 기능 영역-->
+    <div class="row">
+        <div class="col-md-6">
+            {{#userName}}
+                회원정보 : <span id="user">{{userName}}</span>
+                <a href="/logout" class="btn btn-info active" role="button">Logout</a>
+            {{/userName}}
+            {{^userName}}
+                <a href="/oauth2/authorization/google" class="btn btn-success active" role="button">
+                    Google Login
+                </a>
+                <a href="/oauth2/authorization/naver" class="btn btn-secondary active" role="button">
+                    Naver Login
+                </a>
+            {{/userName}}
+        </div>
+    </div>
+    <br>
+    <!-- IT 건물 이미지 불러오기-->
+    <a href="it_building.mustache">
+        <img id="it" src="/img/IT_Building.png" alt="it융합대학" onclick="main_11()" style="opacity: 1;">
+    </a>
+</div>
+
+{{>layout/footer}}

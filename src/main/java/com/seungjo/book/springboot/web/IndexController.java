@@ -41,4 +41,14 @@ public class IndexController {
         model.addAttribute("post", dto);
         return "posts-update";
     }
+
+    @GetMapping("/login")
+    public String img() {
+        return "login";
+    }
+
+    @GetMapping("it_building")
+    public String itBuilding() {
+        return "it_bilding";
+    }
 }
