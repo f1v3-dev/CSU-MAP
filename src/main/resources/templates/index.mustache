@@ -1,34 +1,28 @@
 {{>layout/header}}
 
-<nav class="navbar bg-body-tertiary" style="background-color: #e3f2fd;">
-    <div class="container-fluid">
-        <a class="navbar-brand" style="font-family: 'Noto Sans KR', sans-serif" href="/">CSU Classroom Finder</a>
-        <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
-    </div>
 
+<div class="header">
+    <form action="/posts/search" method="GET" class="form-inline p-2 bd-highlight" role="search">
+        <input type="text" name="keyword" class="form-control" id="search" placeholder="검색">
+        <button class="btn btn-success bi bi-search">검색</button>
+    </form>
     <div class="col-md-12">
         <!-- 로그인 기능 영역-->
         <div class="row">
             <div class="col-md-12">
                 <a href="/posts/save" role="button"
-                   class="btn float-right btn-primary ">글 등록</a>
-                {{#userName}}
-                    안녕하세요: <span id="user"> {{userName}}님!</span>
-                    <a href="/logout" class="btn float-right btn-danger active" role="button">Logout</a>
-                {{/userName}}
-                {{^userName}}
-                    <a href="/login" class="btn float-right btn-light active" style="margin-right: 10px;" role="button">
+                   class="btn float-right btn-primary">글 등록</a>
+                {{#loginUserName}}
+                    안녕하세요  <span id="user">{{loginUserName}} 님</span>
+                    <a href="/logout" class="btn float-right btn-danger active" style="margin-right: 10px"; role="button">Logout</a>
+                {{/loginUserName}}
+                {{^loginUserName}}
+                    <a href="/login" class="btn float-right btn-light active" style="margin-right: 10px"; role="button">
                         로그인
                     </a>
-                {{/userName}}
+                {{/loginUserName}}
             </div>
         </div>
-    </div>
-</nav>
-    <div>
         <br>
         <!-- 목록 출력 영역 -->
         <table class="table table-horizontal table-bordered">
@@ -52,5 +46,5 @@
             </tbody>
         </table>
     </div>
-
+</div>
 {{>layout/footer}}

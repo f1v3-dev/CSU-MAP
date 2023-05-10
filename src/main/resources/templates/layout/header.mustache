@@ -1,13 +1,78 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-    <title>CSU Classroom Finder</title>
+    <title>CSU MAP</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Lobster&display=swap" rel="stylesheet">
+
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR">
+    <style>
+        *{
+            font-family: 'Noto Sans Kr', sans-serif;
+        }
+
+        /* 네비게이션 바 디자인 */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+
+            background-color: white;
+            overflow: hidden;
+            display: flex;
+            /* justify-content: center; */
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px;
+            border-bottom: 3px solid #ccc;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+
+        }
+
+        nav a {
+            float: left;
+            color: black;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        nav a:hover {
+            color: darkblue;
+        }
+
+        .home {
+            background-color: #1A3A91;
+            color: white;
+        }
+
+
+        .header {
+            /* background-color: ; */
+            padding-top: 75px;
+            margin-left: 50px;
+            text-align: left;
+        }
+
+    </style>
 </head>
 <body>
+<nav>
+    <a class="home" href="/">CSU MAP</a>
+    <a href="/introduce">소개 페이지</a>
+    <a href="/notice">공지사항</a>
+    {{#loginUserName}}
+        <a href="/logout">로그아웃</a>
+    {{/loginUserName}}
+    {{^loginUserName}}
+        <a href="/login">로그인</a>
+    {{/loginUserName}}
+
+    <a class="menu" style="float: right;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+        </svg>
+    </a>
+</nav>
+<header>
