@@ -97,10 +97,14 @@ public class IndexController {
                 model.addAttribute("write", userRole.get().getRole());
             }
         }
-
-
         model.addAttribute("posts", postsService.findAllDesc());
         return "nav/notice";
+    }
+
+    @GetMapping("/find")
+    public String findPage(Model model, @LoginUser SessionUser user) {
+
+        return "nav/find";
     }
 
 }
