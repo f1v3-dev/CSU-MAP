@@ -95,7 +95,7 @@ public class IndexController {
             model.addAttribute("loginUserName", user.getName());
 
             Optional<User> userRole = userRepository.findByEmail(user.getEmail());
-            if (userRole.get().getRole() == Role.ADMIN) {
+            if (userRole.get().getRole() == Role.USER) {
                 model.addAttribute("write", userRole.get().getRole());
             }
         }
