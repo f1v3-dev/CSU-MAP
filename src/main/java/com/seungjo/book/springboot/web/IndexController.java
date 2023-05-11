@@ -49,7 +49,9 @@ public class IndexController {
 
 
     @GetMapping("/posts/save")
-    public String postsSave(){
+    public String postsSave(Model model, @LoginUser SessionUser user){
+
+        model.addAttribute("loginUserName", user.getName());
         return "post/posts-save";
     }
 
@@ -93,7 +95,7 @@ public class IndexController {
             model.addAttribute("loginUserName", user.getName());
 
             Optional<User> userRole = userRepository.findByEmail(user.getEmail());
-            if (userRole.get().getRole() == Role.USER) {
+            if (userRole.get().getRole() == Role.ADMIN) {
                 model.addAttribute("write", userRole.get().getRole());
             }
         }
