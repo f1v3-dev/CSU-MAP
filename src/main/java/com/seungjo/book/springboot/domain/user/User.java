@@ -6,15 +6,19 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.UUID;
 
 @Getter
 @NoArgsConstructor
 @Entity
 public class User extends BaseTimeEntity {
 
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    private Long id;
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private String uuid = UUID.randomUUID().toString();
 
     @Column(nullable = false)
     private String name;
