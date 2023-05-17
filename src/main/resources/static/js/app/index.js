@@ -15,6 +15,8 @@ var main = {
     },
     save : function () {
         var data = {
+            image: $('#image').val(),
+            uuid: $('#uuid').val(),
             title: $('#title').val(),
             author: $('#author').val(),
             content: $('#content').val()

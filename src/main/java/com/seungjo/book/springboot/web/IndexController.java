@@ -52,6 +52,7 @@ public class IndexController {
     public String postsSave(Model model, @LoginUser SessionUser user){
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
+            model.addAttribute("uuidValue", user.getUuid());
         }
         return "post/posts-save";
     }

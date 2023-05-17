@@ -8,13 +8,15 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 public class PostsSaveRequestDto {
+    private String uuid;
     private String title;
     private String content;
     private String author;
     private String image;
 
     @Builder
-    public PostsSaveRequestDto(String title, String content, String author, String image){
+    public PostsSaveRequestDto(String uuid, String title, String content, String author, String image){
+        this.uuid = uuid;
         this.title = title;
         this.content = content;
         this.author = author;
@@ -27,6 +29,7 @@ public class PostsSaveRequestDto {
                 .content(content)
                 .author(author)
                 .image(image)
+                .uuid(uuid)
                 .build();
     }
 }

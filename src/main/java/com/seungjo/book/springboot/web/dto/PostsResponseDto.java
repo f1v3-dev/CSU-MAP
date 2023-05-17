@@ -11,8 +11,10 @@ public class PostsResponseDto {
     private String content;
     private String author;
     private String image;
+    private String uuid;
 
     public PostsResponseDto(Posts entity) {
+        this.uuid = entity.getUuid();
         this.id = entity.getId();
         this.title = entity.getTitle();
         this.content = entity.getContent();
