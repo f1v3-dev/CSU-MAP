@@ -24,6 +24,7 @@ import java.util.Optional;
 @Controller
 public class IndexController {
 
+
     private final PostsService postsService;
 
     private final UserRepository userRepository;
@@ -36,11 +37,11 @@ public class IndexController {
         return authentication.isAuthenticated();
     }
 
+
     //@LoginUser를 사용하여 세션 정보를 가져옴
     @GetMapping("/")
     public String index(Model model, @LoginUser SessionUser user){
         model.addAttribute("posts", postsService.findAllDesc());
-
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
         }
@@ -58,9 +59,20 @@ public class IndexController {
     }
 
     @GetMapping("/posts/update/{id}")
-    public String postsUpdate(@PathVariable Long id, Model model){
+    public String postsUpdate(@PathVariable Long id, Model model, @LoginUser SessionUser user){
+        if (user != null) {
+            model.addAttribute("loginUserName", user.getName());
+        }
+
         PostsResponseDto dto = postsService.findById(id);
+        System.out.println("dto.getUuid() = " + dto.getUuid());
+        System.out.println("user.getUuid() = " + user.getUuid());
+
+        if (dto.getUuid() != null && user.getUuid() != null && dto.getUuid().equals(user.getUuid())){
+            model.addAttribute("equalUuid", user.getUuid());
+        }
         model.addAttribute("post", dto);
+
         return "post/posts-update";
     }
 
@@ -76,7 +88,9 @@ public class IndexController {
     @GetMapping("/login")
     public String getLoginPage(Model model, @LoginUser SessionUser user) throws Exception {
         if (isAuthenticated()) {
-            model.addAttribute("loginUserName", user.getName());
+            if (user != null) {
+                model.addAttribute("loginUserName", user.getName());
+            }
             return "index";
         }
         return "oauth/login";
@@ -107,6 +121,10 @@ public class IndexController {
 
     @GetMapping("/find")
     public String findPage(Model model, @LoginUser SessionUser user) {
+
+        if (user != null) {
+            model.addAttribute("loginUserName", user.getName());
+        }
 
         return "nav/find";
     }

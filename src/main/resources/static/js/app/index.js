@@ -37,6 +37,7 @@ var main = {
     },
     update : function () {
         var data = {
+            image: $('#image').val(),
             title: $('#title').val(),
             content: $('#content').val()
         };
