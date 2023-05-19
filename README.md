@@ -24,3 +24,4 @@
 3. update user set role = 'USER'; // 기존 유저들의 권한을 'GUEST' -> 'USER' 로 수정
 
 --- 
+view에서 posts로 데이터 전송시 index.js의 function data 형식 변경 필요
