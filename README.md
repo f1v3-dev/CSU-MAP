@@ -23,6 +23,4 @@
 2. select * from user; // 유저 있는지 확인
 3. update user set role = 'USER'; // 기존 유저들의 권한을 'GUEST' -> 'USER' 로 수정
 
-
----
-test
+--- 
