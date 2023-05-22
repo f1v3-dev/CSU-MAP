@@ -10,7 +10,7 @@ public class PostsListResponseDto {
     private Long id;
     private String title;
     private String author;
-    private String modifiedDate;
+    private LocalDateTime modifiedDate;
     private String image;
 
     public PostsListResponseDto(Posts entity) {
