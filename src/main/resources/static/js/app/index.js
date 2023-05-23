@@ -15,7 +15,7 @@ var main = {
     },
     save : function () {
         var data = {
-            image: $('#image').val(),
+            file: $('#file').val(),
             uuid: $('#uuid').val(),
             title: $('#title').val(),
             author: $('#author').val(),
@@ -37,7 +37,7 @@ var main = {
     },
     update : function () {
         var data = {
-            image: $('#image').val(),
+            file: $('#file').val(),
             title: $('#title').val(),
             content: $('#content').val()
         };

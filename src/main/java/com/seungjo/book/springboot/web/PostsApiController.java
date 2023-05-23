@@ -1,12 +1,14 @@
 package com.seungjo.book.springboot.web;
 
 
+import com.seungjo.book.springboot.service.posts.FileService;
 import com.seungjo.book.springboot.service.posts.PostsService;
 import com.seungjo.book.springboot.web.dto.PostsResponseDto;
 import com.seungjo.book.springboot.web.dto.PostsSaveRequestDto;
 import com.seungjo.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RequiredArgsConstructor
 @RestController
@@ -14,8 +16,14 @@ public class PostsApiController {
 
     private final PostsService postsService;
 
+    private final FileService fileService;
     @PostMapping("/api/v1/posts")
-    public Long save(@RequestBody PostsSaveRequestDto requestsDto) {
+    public Long save(PostsSaveRequestDto requestsDto, @RequestParam("file") MultipartFile file) {
+
+        fileService.fileUpload(file);
+
+        System.out.println("requestsDto.getImage().toString() = " + requestsDto.getImage().toString());
+        System.out.println("file.getOriginalFilename() = " + file.getOriginalFilename());
         return postsService.save(requestsDto);
     }
 
