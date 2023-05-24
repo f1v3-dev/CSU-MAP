@@ -15,7 +15,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Optional;
@@ -28,6 +31,7 @@ public class IndexController {
     private final PostsService postsService;
 
     private final UserRepository userRepository;
+
 
     private boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -54,6 +58,7 @@ public class IndexController {
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
             model.addAttribute("uuidValue", user.getUuid());
+
         }
         return "post/posts-save";
     }
