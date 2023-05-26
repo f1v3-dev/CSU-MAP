@@ -36,9 +36,4 @@ public class PostsSaveRequestDto {
                 .uuid(uuid)
                 .build();
     }
-
-
-    public void setImage(String image) {
-        this.image = image;
-    }
 }
