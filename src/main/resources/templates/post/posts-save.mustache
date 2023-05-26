@@ -5,7 +5,7 @@
 <div class="header">
     <div class="col-md-12">
         <div class="col-md-4">
-            <form>
+            <form enctype="multipart/form-data">
                 <div class="form-group" style="display: none">
                     <label for="uuid">UUID</label>
                     <input type="text" class="form-control" id="uuid" value="{{uuidValue}}" readonly>
@@ -26,6 +26,14 @@
                     <label for="image">이미지 첨부</label>
                     <input type="file" id="image" name="image">
                 </div>
+                <script>
+                    const fileInput = document.getElementById('image');
+                    fileInput.addEventListener('change', (event) => {
+                        const selectedFile = event.target.files[0];
+                        const fileName = selectedFile.name;
+                        document.getElementById('image').value = fileName;
+                    });
+                </script>
             </form>
             <a href="/" role="button" class="btn btn-secondary">취소</a>
             <button type="button" class="btn btn-primary" id="btn-save">등록</button>
