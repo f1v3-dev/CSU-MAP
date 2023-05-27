@@ -140,5 +140,13 @@ public class IndexController {
 
         return "nav/find";
     }
-
+    
+    @GetMapping({"/IT", "/IT/{floor}"})
+    public String ITPage(@PathVariable(required = false) Integer floor) {
+        if (floor != null) {
+            return "IT/IT_" + floor;
+        } else {
+            return "IT/IT";
+        }
+    }
 }
