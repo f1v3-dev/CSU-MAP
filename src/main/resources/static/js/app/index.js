@@ -71,28 +71,8 @@ var main = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
-    },
-    search : function() {
-        var floor = $('#floor').val();
-
-        $.ajax({
-            url : '/IT/'+floor,
-            type: 'GET',
-            async: true,
-            dataType: 'html',
-            timeout: 10000,
-            contentType: 'text/html; charset=utf-8'
-        }).done(function (response) {
-            $('#page-content').html(response);
-        }).fail(function (error) {
-            alert(JSON.stringify(error));
-        });
     }
+
 };
 
 main.init();
-
-$('#floor-select').on('change', function () {
-    var selectedFloor = $(this).val();
-    main.loadFloorPage(selectedFloor);
-});
