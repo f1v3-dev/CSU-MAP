@@ -55,7 +55,6 @@ public class IndexController {
             model.addAttribute("loginUserName", user.getName());
             model.addAttribute("uuidValue", user.getUuid());
         }
-
         return "post/posts-save";
     }
 
@@ -78,6 +77,8 @@ public class IndexController {
         }
 
         PostsResponseDto dto = postsService.findById(id);
+        System.out.println("dto.getUuid() = " + dto.getUuid());
+        System.out.println("user.getUuid() = " + user.getUuid());
 
         if (dto.getUuid() != null && user.getUuid() != null && dto.getUuid().equals(user.getUuid())){
             model.addAttribute("equalUuid", user.getUuid());
@@ -139,12 +140,5 @@ public class IndexController {
 
         return "nav/find";
     }
-    @GetMapping({"/IT", "/IT/{floor}"})
-    public String ITPage(@PathVariable(required = false) Integer floor) {
-        if (floor != null) {
-            return "IT/IT_" + floor;
-        } else {
-            return "IT/IT";
-        }
-    }
+
 }
