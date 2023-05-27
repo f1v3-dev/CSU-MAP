@@ -13,12 +13,11 @@ public class PostsUpdateRequestDto {
     private String title;
     @NotBlank(message = "내용을 입력해주세요")
     private String content;
-    private String image;
 
     @Builder
-    public PostsUpdateRequestDto(String title, String content, String image){
+    public PostsUpdateRequestDto(String title, String content){
         this.title = title;
         this.content = content;
-        this.image = image;
+
     }
 }

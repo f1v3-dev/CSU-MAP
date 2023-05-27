@@ -1,17 +1,21 @@
 package com.seungjo.book.springboot.service.posts;
 
+import com.seungjo.book.springboot.domain.file.UploadFile;
 import com.seungjo.book.springboot.domain.posts.Posts;
 import com.seungjo.book.springboot.domain.posts.PostsRepository;
+import com.seungjo.book.springboot.service.file.FileService;
 import com.seungjo.book.springboot.web.dto.PostsListResponseDto;
 import com.seungjo.book.springboot.web.dto.PostsResponseDto;
 import com.seungjo.book.springboot.web.dto.PostsSaveRequestDto;
 import com.seungjo.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 
 import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -19,19 +23,20 @@ import java.util.stream.Collectors;
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
+    private FileService fileService;
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {
         return postsRepository.save(requestDto.toEntity()).getId();
     }
 
+
     @Transactional
     public Long update(Long id, PostsUpdateRequestDto requestDto) {
         Posts posts = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
 
-        posts.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getImage());
-
+        posts.update(requestDto.getTitle(), requestDto.getContent());
         return id;
     }
 

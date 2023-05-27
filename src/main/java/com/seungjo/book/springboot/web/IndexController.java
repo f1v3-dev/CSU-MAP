@@ -2,12 +2,16 @@ package com.seungjo.book.springboot.web;
 
 import com.seungjo.book.springboot.config.auth.LoginUser;
 import com.seungjo.book.springboot.config.auth.dto.SessionUser;
+import com.seungjo.book.springboot.domain.file.UploadFile;
 import com.seungjo.book.springboot.domain.posts.Posts;
+import com.seungjo.book.springboot.domain.posts.PostsRepository;
 import com.seungjo.book.springboot.domain.user.Role;
 import com.seungjo.book.springboot.domain.user.User;
 import com.seungjo.book.springboot.domain.user.UserRepository;
+import com.seungjo.book.springboot.service.file.FileService;
 import com.seungjo.book.springboot.service.posts.PostsService;
 import com.seungjo.book.springboot.web.dto.PostsResponseDto;
+import com.seungjo.book.springboot.web.dto.PostsSaveRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -15,8 +19,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +36,8 @@ public class IndexController {
     private final PostsService postsService;
 
     private final UserRepository userRepository;
+    private final FileService fileService;
+    private final PostsRepository postsRepository;
 
     private boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

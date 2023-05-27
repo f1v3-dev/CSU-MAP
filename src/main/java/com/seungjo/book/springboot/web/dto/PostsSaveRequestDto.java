@@ -1,13 +1,20 @@
 package com.seungjo.book.springboot.web.dto;
 
 import com.seungjo.book.springboot.domain.posts.Posts;
+import com.seungjo.book.springboot.domain.file.UploadFile;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.NotBlank;
+import java.io.IOException;
+import java.util.List;
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class PostsSaveRequestDto {
     private String uuid;
@@ -16,15 +23,19 @@ public class PostsSaveRequestDto {
     @NotBlank(message = "내용을 입력해주세요")
     private String content;
     private String author;
-    private String image;
+    private List<MultipartFile> imageFiles;
+
+
+
 
     @Builder
-    public PostsSaveRequestDto(String uuid, String title, String content, String author, String image){
+    public PostsSaveRequestDto(String uuid, String title, String content, String author, List<MultipartFile> imageFiles) throws IOException {
         this.uuid = uuid;
         this.title = title;
         this.content = content;
         this.author = author;
-        this.image = image;
+        this.imageFiles = imageFiles;
+
     }
 
     public Posts toEntity(){
@@ -32,7 +43,6 @@ public class PostsSaveRequestDto {
                 .title(title)
                 .content(content)
                 .author(author)
-                .image(image)
                 .uuid(uuid)
                 .build();
     }

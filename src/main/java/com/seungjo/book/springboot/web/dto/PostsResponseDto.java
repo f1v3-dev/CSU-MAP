@@ -10,7 +10,6 @@ public class PostsResponseDto {
     private String title;
     private String content;
     private String author;
-    private String image;
     private String uuid;
 
     public PostsResponseDto(Posts entity) {
@@ -19,6 +18,5 @@ public class PostsResponseDto {
         this.title = entity.getTitle();
         this.content = entity.getContent();
         this.author = entity.getAuthor();
-        this.image = entity.getImage();
     }
 }
