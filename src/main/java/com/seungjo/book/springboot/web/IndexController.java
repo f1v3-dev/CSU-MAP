@@ -59,6 +59,18 @@ public class IndexController {
         return "post/posts-save";
     }
 
+    @GetMapping("posts/{id}")
+    public String posts(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
+
+        PostsResponseDto dto = postsService.findById(id);
+        if (dto.getUuid() != null && user.getUuid() != null && dto.getUuid().equals(user.getUuid())){
+            model.addAttribute("equalUuid", user.getUuid());
+        }
+        model.addAttribute("post", dto);
+
+        return "post/posts-view";
+    }
+
     @GetMapping("/posts/update/{id}")
     public String postsUpdate(@PathVariable Long id, Model model, @LoginUser SessionUser user){
         if (user != null) {
