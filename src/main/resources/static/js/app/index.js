@@ -14,20 +14,24 @@ var main = {
         });
     },
     save : function () {
-        var data = {
-            image: $('#image').val(),
-            uuid: $('#uuid').val(),
-            title: $('#title').val(),
-            author: $('#author').val(),
-            content: $('#content').val()
-        };
+        var form = $('formData')[0];
+        var formData = new FormData(form);
+        // var data = {
+        //     image: $('#image').val(),
+        //     uuid: $('#uuid').val(),
+        //     title: $('#title').val(),
+        //     author: $('#author').val(),
+        //     content: $('#content').val()
+        // };
 
         $.ajax({
             type: 'POST',
             url: '/api/v1/posts',
             dataType: 'json',
-            contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
+            enctype: 'multipart/form-data',
+            contentType: false,
+            processData: false,
+            data: JSON.stringify(formData)
         }).done(function() {
             alert('글이 등록되었습니다.');
             window.location.href = '/';
