@@ -1,14 +1,13 @@
 package com.seungjo.book.springboot.web;
 
 
-import com.seungjo.book.springboot.service.file.FileService;
+import com.seungjo.book.springboot.service.file.FilesService;
 import com.seungjo.book.springboot.service.posts.PostsService;
 import com.seungjo.book.springboot.web.dto.PostsResponseDto;
 import com.seungjo.book.springboot.web.dto.PostsSaveRequestDto;
 import com.seungjo.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.web.bind.annotation.*;
@@ -23,20 +22,14 @@ import java.net.MalformedURLException;
 public class PostsApiController {
 
     private final PostsService postsService;
-    private final FileService fileService;
+    private final FilesService filesService;
 
     @PostMapping("/api/v1/posts")
     public String save(@ModelAttribute PostsSaveRequestDto requestsDto, RedirectAttributes redirectAttributes) throws IOException {
         Long postId = postsService.save(requestsDto);
-        fileService.storeFiles(requestsDto.getImageFiles(), postId);
+        filesService.storeFiles(requestsDto.getImageFiles(), postId);
         redirectAttributes.addAttribute("postId", postId);
         return "redirect:/posts/{postId}";
-    }
-
-    @ResponseBody
-    @GetMapping("/images/{filename}")
-    public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
-        return new UrlResource("file:" + fileService.getFullPath(filename));
     }
 
     @PutMapping("api/v1/posts/{id}")

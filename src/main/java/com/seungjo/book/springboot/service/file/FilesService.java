@@ -1,15 +1,12 @@
 package com.seungjo.book.springboot.service.file;
 
-import com.seungjo.book.springboot.domain.file.FileRepository;
+import com.seungjo.book.springboot.domain.file.FilesRepository;
+import com.seungjo.book.springboot.domain.file.Files;
 import com.seungjo.book.springboot.domain.file.UploadFile;
-import com.seungjo.book.springboot.domain.posts.Posts;
-import com.seungjo.book.springboot.web.dto.FileDto;
-import com.seungjo.book.springboot.web.dto.PostsResponseDto;
-import com.seungjo.book.springboot.web.dto.PostsSaveRequestDto;
+import com.seungjo.book.springboot.web.dto.FilesDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,19 +17,19 @@ import java.util.*;
 
 @Service
 @RequiredArgsConstructor
-public class FileService {
+public class FilesService {
     @Value("${file.dir}")
     private String fileDir;
 
-    private final FileRepository fileRepository;
+    private final FilesRepository filesRepository;
 
     public String getFullPath(String filename) {
         return fileDir + filename;
     }
 
     @Transactional
-    public Long saveDb(FileDto requestDto) {
-        return fileRepository.save(requestDto.toEntity()).getId();
+    public Long saveDb(FilesDto requestDto) {
+        return filesRepository.save(requestDto.toEntity()).getId();
     }
 
     public List<UploadFile> storeFiles(List<MultipartFile> multipartFiles, Long postId) throws IOException {
@@ -54,7 +51,7 @@ public class FileService {
         multipartFile.transferTo(new File(getFullPath(storeFileName)));
 
         // FileDto 객체 생성
-        FileDto fileDto = FileDto.builder()
+        FilesDto filesDto = FilesDto.builder()
                 .originalFileName(originalFilename)
                 .savedFileName(storeFileName)
                 .size(multipartFile.getSize())
@@ -62,7 +59,7 @@ public class FileService {
                 .build();
 
         // File Insert
-        Long fileId = saveDb(fileDto);
+        Long fileId = saveDb(filesDto);
 
 
         return new UploadFile(originalFilename, storeFileName);
@@ -78,12 +75,8 @@ public class FileService {
         int pos = originalFilename.lastIndexOf(".");
         return originalFilename.substring(pos + 1);
     }
-
-    public FileDto findById(Long id) {
-        com.seungjo.book.springboot.domain.file.File entity = fileRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("해당 파일이 없습니다. id=" + id));
-
-        return new FileDto(entity);
+    public List<Files> findByPostId(Long postId) {
+        return filesRepository.findByPostId(postId);
     }
 
 }

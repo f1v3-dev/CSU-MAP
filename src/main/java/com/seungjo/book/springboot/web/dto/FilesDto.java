@@ -1,12 +1,11 @@
 package com.seungjo.book.springboot.web.dto;
 
-import com.seungjo.book.springboot.domain.file.File;
-import com.seungjo.book.springboot.domain.posts.Posts;
+import com.seungjo.book.springboot.domain.file.Files;
 import lombok.Builder;
 import lombok.Data;
 
 @Data
-public class FileDto {
+public class FilesDto {
 
     private Long id; // id
     private String originalFileName;
@@ -15,7 +14,7 @@ public class FileDto {
     private Long postId;
 
     @Builder
-    public FileDto(Long id, String originalFileName, String savedFileName, Long size, Long postId) {
+    public FilesDto(Long id, String originalFileName, String savedFileName, Long size, Long postId) {
         this.id = id;
         this.originalFileName = originalFileName;
         this.savedFileName = savedFileName;
@@ -23,7 +22,7 @@ public class FileDto {
         this.postId = postId;
     }
 
-    public FileDto(File entity) {
+    public FilesDto(Files entity) {
         this.id = entity.getId();
         this.originalFileName = entity.getOriginalFileName();
         this.savedFileName = entity.getSavedFileName();
@@ -31,8 +30,8 @@ public class FileDto {
         this.postId = entity.getPostId();
     }
 
-    public File toEntity() {
-        return File.builder()
+    public Files toEntity() {
+        return Files.builder()
                 .originalFileName(originalFileName)
                 .savedFileName(savedFileName)
                 .size(size)

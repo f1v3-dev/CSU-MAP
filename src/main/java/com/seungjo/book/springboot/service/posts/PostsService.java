@@ -1,18 +1,15 @@
 package com.seungjo.book.springboot.service.posts;
 
-import com.seungjo.book.springboot.domain.file.UploadFile;
 import com.seungjo.book.springboot.domain.posts.Posts;
 import com.seungjo.book.springboot.domain.posts.PostsRepository;
-import com.seungjo.book.springboot.service.file.FileService;
+import com.seungjo.book.springboot.service.file.FilesService;
 import com.seungjo.book.springboot.web.dto.*;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,7 +17,7 @@ import java.util.stream.Collectors;
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
-    private final FileService fileService;
+    private final FilesService filesService;
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {
@@ -61,9 +58,6 @@ public class PostsService {
 
     @Transactional
     public List<Posts> search(String keyword) {
-//        List<Posts> postsList = postsRepository.findByTitleContaining(keyword);
-//        return postsList;
-
         return postsRepository.findByTitleContaining(keyword);
     }
 
