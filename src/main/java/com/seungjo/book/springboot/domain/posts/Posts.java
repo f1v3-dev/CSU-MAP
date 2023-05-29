@@ -25,8 +25,6 @@ public class Posts extends BaseTimeEntity {
     private String author;
 
     private String uuid;
-    //private String originalFileName;
-    //private String savedFileName;
 
     @Builder
     public Posts(String title, String content, String author, String uuid){

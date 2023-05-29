@@ -4,10 +4,7 @@ import com.seungjo.book.springboot.domain.file.UploadFile;
 import com.seungjo.book.springboot.domain.posts.Posts;
 import com.seungjo.book.springboot.domain.posts.PostsRepository;
 import com.seungjo.book.springboot.service.file.FileService;
-import com.seungjo.book.springboot.web.dto.PostsListResponseDto;
-import com.seungjo.book.springboot.web.dto.PostsResponseDto;
-import com.seungjo.book.springboot.web.dto.PostsSaveRequestDto;
-import com.seungjo.book.springboot.web.dto.PostsUpdateRequestDto;
+import com.seungjo.book.springboot.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,7 +20,7 @@ import java.util.stream.Collectors;
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
-    private FileService fileService;
+    private final FileService fileService;
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {

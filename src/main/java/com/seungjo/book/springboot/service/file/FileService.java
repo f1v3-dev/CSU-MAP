@@ -2,6 +2,7 @@ package com.seungjo.book.springboot.service.file;
 
 import com.seungjo.book.springboot.domain.file.FileRepository;
 import com.seungjo.book.springboot.domain.file.UploadFile;
+import com.seungjo.book.springboot.domain.posts.Posts;
 import com.seungjo.book.springboot.web.dto.FileDto;
 import com.seungjo.book.springboot.web.dto.PostsResponseDto;
 import com.seungjo.book.springboot.web.dto.PostsSaveRequestDto;
@@ -75,6 +76,13 @@ public class FileService {
     private String extractExt(String originalFilename) {
         int pos = originalFilename.lastIndexOf(".");
         return originalFilename.substring(pos + 1);
+    }
+
+    public FileDto findById(Long id) {
+        com.seungjo.book.springboot.domain.file.File entity = fileRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 파일이 없습니다. id=" + id));
+
+        return new FileDto(entity);
     }
 
 

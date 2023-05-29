@@ -22,6 +22,12 @@
                     <label for="content"> 내용 </label>
                     <textarea class="form-control" id="content" readonly>{{post.content}}</textarea>
                 </div>
+                {{#file.imageFiles}}
+                <div class="form-group">
+                    <label for="imageFiles"> 이미지 파일</label>
+                    <img src="/images/{{file.savedFileName}}" width="300" height="300">
+                </div>
+                {{/file.imageFiles}}
             </form>
             {{#equalUuid}}
             <a href="update/{{post.id}}" role="button" class="btn btn-secondary">글수정</a>
