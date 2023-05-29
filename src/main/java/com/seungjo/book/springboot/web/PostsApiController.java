@@ -26,12 +26,11 @@ public class PostsApiController {
     private final FileService fileService;
 
     @PostMapping("/api/v1/posts")
-    public Long save(@ModelAttribute PostsSaveRequestDto requestsDto) throws IOException {
-        System.out.println("requestsDto.getTitle() = " + requestsDto.getTitle());
-        fileService.storeFiles(requestsDto.getImageFiles());
-        System.out.println("postsService = " + postsService.save(requestsDto));
-
-        return postsService.save(requestsDto);
+    public String save(@ModelAttribute PostsSaveRequestDto requestsDto, RedirectAttributes redirectAttributes) throws IOException {
+        Long postId = postsService.save(requestsDto);
+        fileService.storeFiles(requestsDto.getImageFiles(), postId);
+        redirectAttributes.addAttribute("postId", postId);
+        return "redirect:/posts/{postId}";
     }
 
     @ResponseBody

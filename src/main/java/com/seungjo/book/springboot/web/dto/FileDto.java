@@ -12,15 +12,15 @@ public class FileDto {
     private String originalFileName;
     private String savedFileName;
     private Long size;
-    private Posts posts;
+    private Long postId;
 
     @Builder
-    public FileDto(Long id, String originalFileName, String savedFileName, Long size, Posts posts) {
+    public FileDto(Long id, String originalFileName, String savedFileName, Long size, Long postId) {
         this.id = id;
         this.originalFileName = originalFileName;
         this.savedFileName = savedFileName;
         this.size = size;
-        this.posts = posts;
+        this.postId = postId;
     }
 
     public FileDto(File entity) {
@@ -28,7 +28,7 @@ public class FileDto {
         this.originalFileName = entity.getOriginalFileName();
         this.savedFileName = entity.getSavedFileName();
         this.size = entity.getSize();
-        this.posts = entity.getPosts();
+        this.postId = entity.getPostId();
     }
 
     public File toEntity() {
@@ -36,7 +36,7 @@ public class FileDto {
                 .originalFileName(originalFileName)
                 .savedFileName(savedFileName)
                 .size(size)
-                .posts(posts)
+                .postId(postId)
                 .build();
     }
 }

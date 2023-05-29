@@ -18,23 +18,19 @@ public class File extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    @JoinColumn(name="POST_ID")
-    private Posts posts;
-
     @Column
     private String originalFileName;
 
     @Column
     private String savedFileName;
-
     private Long size;
+    private Long postId;
 
     @Builder
-    public File(String originalFileName, String savedFileName, Long size, Posts posts) {
+    public File(String originalFileName, String savedFileName, Long size, Long postId) {
         this.originalFileName = originalFileName;
         this.savedFileName = savedFileName;
         this.size = size;
-        this.posts = posts;
+        this.postId = postId;
     }
 }

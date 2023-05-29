@@ -35,17 +35,17 @@ public class FileService {
         return fileRepository.save(requestDto.toEntity()).getId();
     }
 
-    public List<UploadFile> storeFiles(List<MultipartFile> multipartFiles) throws IOException {
+    public List<UploadFile> storeFiles(List<MultipartFile> multipartFiles, Long postId) throws IOException {
         List<UploadFile> storeFileResult = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
             if (!multipartFile.isEmpty()) {
-                storeFileResult.add(storeFile(multipartFile));
+                storeFileResult.add(storeFile(multipartFile, postId));
             }
         }
         return storeFileResult;
     }
 
-    public UploadFile storeFile(MultipartFile multipartFile) throws IOException {
+    public UploadFile storeFile(MultipartFile multipartFile, Long postId) throws IOException {
         if (multipartFile.isEmpty()) {
             return null;
         }
@@ -58,6 +58,7 @@ public class FileService {
                 .originalFileName(originalFilename)
                 .savedFileName(storeFileName)
                 .size(multipartFile.getSize())
+                .postId(postId)
                 .build();
 
         // File Insert
@@ -84,7 +85,6 @@ public class FileService {
 
         return new FileDto(entity);
     }
-
 
 }
 
