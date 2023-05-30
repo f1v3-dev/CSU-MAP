@@ -2,13 +2,18 @@ package com.seungjo.book.springboot.web;
 
 import com.seungjo.book.springboot.config.auth.LoginUser;
 import com.seungjo.book.springboot.config.auth.dto.SessionUser;
+import com.seungjo.book.springboot.domain.file.Files;
 import com.seungjo.book.springboot.domain.posts.Posts;
+import com.seungjo.book.springboot.domain.posts.PostsRepository;
 import com.seungjo.book.springboot.domain.user.Role;
 import com.seungjo.book.springboot.domain.user.User;
 import com.seungjo.book.springboot.domain.user.UserRepository;
+import com.seungjo.book.springboot.service.file.FilesService;
 import com.seungjo.book.springboot.service.posts.PostsService;
 import com.seungjo.book.springboot.web.dto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.UrlResource;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -16,7 +21,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.net.MalformedURLException;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,6 +35,8 @@ public class IndexController {
     private final PostsService postsService;
 
     private final UserRepository userRepository;
+    private final FilesService filesService;
+    private final PostsRepository postsRepository;
 
     private boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -62,12 +71,24 @@ public class IndexController {
     public String posts(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
 
         PostsResponseDto dto = postsService.findById(id);
+        List<Files> filesList = filesService.findByPostId(id);
+        for (Files files : filesList) {
+            System.out.println("files.getSavedFileName() = " + files.getSavedFileName());
+        }
         if (dto.getUuid() != null && user.getUuid() != null && dto.getUuid().equals(user.getUuid())){
+            model.addAttribute("loginUserName", user.getName());
             model.addAttribute("equalUuid", user.getUuid());
         }
         model.addAttribute("post", dto);
+        model.addAttribute("filesList", filesList);
 
         return "post/posts-view";
+    }
+
+    @ResponseBody
+    @GetMapping("/images/{filename}")
+    public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
+        return new UrlResource("file:" + filesService.getFullPath(filename));
     }
 
     @GetMapping("/posts/update/{id}")

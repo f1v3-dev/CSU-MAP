@@ -19,27 +19,25 @@ public class Posts extends BaseTimeEntity {
     @Column(length = 500, nullable = false)
     private String title;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = true)
     private String content;
 
     private String author;
 
-    private String image;
-
     private String uuid;
 
     @Builder
-    public Posts(String title, String content, String author, String image, String uuid){
+    public Posts(String title, String content, String author, String uuid){
         this.title = title;
         this.content = content;
         this.author = author;
-        this.image = image;
         this.uuid = uuid;
+        //this.originalFileName = originalFileName;
+        //this.savedFileName = savedFileName;
     }
 
-    public void update(String title, String content, String image){
+    public void update(String title, String content){
         this.title = title;
         this.content = content;
-        this.image = image;
     }
 }

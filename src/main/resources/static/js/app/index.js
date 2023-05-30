@@ -14,22 +14,16 @@ var main = {
         });
     },
     save : function () {
-        //var form = $('formData')[0];
-        //var formData = new FormData(form);
-        var data = {
-              image: $('#image').val(),
-              uuid: $('#uuid').val(),
-              title: $('#title').val(),
-              author: $('#author').val(),
-              content: $('#content').val()
-          };
+
+        var formData = new FormData($('#form-data')[0]);
 
         $.ajax({
             type: 'POST',
             url: '/api/v1/posts',
-            dataType: 'json',
-            contentType:'application/json; charset=utf-8',
-            data: JSON.stringify(data)
+            // enctype: 'multipart/form-data',
+            data: formData,
+            processData: false,
+            contentType: false,
         }).done(function() {
             alert('글이 등록되었습니다.');
             window.location.href = '/';
@@ -74,7 +68,6 @@ var main = {
             alert(JSON.stringify(error));
         });
     }
-
 };
 
 main.init();

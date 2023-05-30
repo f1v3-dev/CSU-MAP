@@ -2,10 +2,8 @@ package com.seungjo.book.springboot.service.posts;
 
 import com.seungjo.book.springboot.domain.posts.Posts;
 import com.seungjo.book.springboot.domain.posts.PostsRepository;
-import com.seungjo.book.springboot.web.dto.PostsListResponseDto;
-import com.seungjo.book.springboot.web.dto.PostsResponseDto;
-import com.seungjo.book.springboot.web.dto.PostsSaveRequestDto;
-import com.seungjo.book.springboot.web.dto.PostsUpdateRequestDto;
+import com.seungjo.book.springboot.service.file.FilesService;
+import com.seungjo.book.springboot.web.dto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -19,19 +17,20 @@ import java.util.stream.Collectors;
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
+    private final FilesService filesService;
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {
         return postsRepository.save(requestDto.toEntity()).getId();
     }
 
+
     @Transactional
     public Long update(Long id, PostsUpdateRequestDto requestDto) {
         Posts posts = postsRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("해당 사용자가 없습니다. id=" + id));
 
-        posts.update(requestDto.getTitle(), requestDto.getContent(), requestDto.getImage());
-
+        posts.update(requestDto.getTitle(), requestDto.getContent());
         return id;
     }
 
@@ -59,9 +58,6 @@ public class PostsService {
 
     @Transactional
     public List<Posts> search(String keyword) {
-//        List<Posts> postsList = postsRepository.findByTitleContaining(keyword);
-//        return postsList;
-
         return postsRepository.findByTitleContaining(keyword);
     }
 

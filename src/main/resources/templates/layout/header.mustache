@@ -2,20 +2,13 @@
 <html>
 <head>
     <title>CSU MAP</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Sans+KR">
     <style>
-        * {
+        *{
             font-family: 'Noto Sans Kr', sans-serif;
-        }
-
-        building {
-            width: 5px;
-            height: 3px;
-            pont-size: 10px;
-            pont-color: black;
         }
 
         /* 네비게이션 바 디자인 */
@@ -24,16 +17,21 @@
             top: 0;
             left: 0;
             right: 0;
+
             background-color: white;
             overflow: hidden;
             display: flex;
-            justify-content: flex-end;
-            padding: 10px;
+            /* justify-content: center; */
+            padding-top: 10px;
+            padding-bottom: 10px;
+            padding-left: 10px;
             border-bottom: 3px solid #ccc;
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+
         }
 
         nav a {
+            float: left;
             color: black;
             text-align: center;
             padding: 14px 16px;
@@ -49,56 +47,23 @@
             color: white;
         }
 
-        .menu {
-            margin-left: auto;
-            cursor: pointer;
-        }
 
-        .menu svg {
-            transition: transform 0.3s ease;
+        .header {
+            /* background-color: ; */
+            padding-top: 90px;
+            margin-left: 50px;
+            text-align: left;
         }
-
-        .menu:hover svg {
-            transform: scale(1.2);
+        .container {
+            display: grid;
+            flex-direction: row;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+            /* background-color: #f2f2f2; */
         }
-
-        .menu:active svg {
-            transform: scale(0.9);
-        }
-
-        .sub-menu {
-            display: block;
-            position: fixed;
-            z-index: 1;
-            left: auto;
-            top: 0;
-            width: 30%;
-            height: 90%;
-            overflow: auto;
-            margin-left: auto;
-            background: white;
-            backface-visibility: hidden;
-            right: 0;
-        }
-
-        .sub-menu .close-icon {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            cursor: pointer;
-            font-size: 18px;
-            color: #999;
-        }
-
-        .overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: rgba(0, 0, 0, 0.3);
-            backdrop-filter: blur(1px);
-            z-index: 0;
+        .container div {
+            color: grey;
         }
     </style>
 </head>
@@ -108,66 +73,18 @@
     <a href="/introduce">소개 페이지</a>
     <a href="/notice">공지사항</a>
     <a href="/find">분실물 찾기</a>
-    {{#loginUserName}}
-        <a href="/logout">로그아웃</a>
-    {{/loginUserName}}
-    {{^loginUserName}}
-        <a href="/login">로그인</a>
-    {{/loginUserName}}
-    <div class="menu" onclick="toggleMenu()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-list"
-             viewBox="0 0 16 16">
-            <path fill-rule="evenodd"
-                  d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
-        </svg>
-        <div id="menu-box" class="sub-menu" style="display: none;">
-            <button class="close-icon" onclick="closeMenu()"><span aria-hidden="true">×</span></button>
-            <div style="background-color: white; padding: 10px; border-radius: 1px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);">
-                <a href="IT">IT융합대학</a></div>
-            <div style="background-color: white; padding: 10px; border-radius: 1px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);">
-                <a href="#">본관</a></div>
-            <div style="background-color: white; padding: 10px; border-radius: 1px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);">
-                <a href="#">경상대학</a></div>
-            <div style="background-color: white; padding: 10px; border-radius: 1px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);">
-                <a href="#">법과대학</a></div>
-            <div style="background-color: white; padding: 10px; border-radius: 1px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);">
-                <a href="#">공과대학1호관</a></div>
-            <div style="background-color: white; padding: 10px; border-radius: 1px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);">
-                <a href="#">공과대학2호관</a></div>
-            <div style="background-color: white; padding: 10px; border-radius: 1px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);">
-                <a href="#">미술대학</a></div>
-            <div style="background-color: white; padding: 10px; border-radius: 1px; box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);">
-                <a href="#">자연과학대학</a></div>
-            <!-- 다른 메뉴 항목 추가 -->
-        </div>
-    </div>
-    <div class="overlay" onclick="closeMenu()" style="display: none;"></div>
+    <div class="ml-auto">
+        {{#loginUserName}}
+            <a href="/logout">로그아웃</a>
+        {{/loginUserName}}
+        {{^loginUserName}}
+            <a href="/login">로그인</a>
+        {{/loginUserName}}
+        <a class="menu">
+            <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-list" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5zm0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5z"/>
+            </svg>
+        </a>
     </div>
 </nav>
-<script>
-    function toggleMenu() {
-        var menuBox = document.querySelector(".sub-menu");
-        menuBox.classList.toggle("show");
-        var overlay = document.querySelector(".overlay");
-        overlay.style.display = menuBox.classList.contains("show") ? "block" : "none";
-        menuBox.style.display = "block"; // 추가된 코드
-    }
-
-
-    function closeMenu() {
-        var menuBox = document.querySelector(".sub-menu");
-        menuBox.classList.remove("show");
-        var overlay = document.querySelector(".overlay");
-        overlay.style.display = "none";
-        menuBox.style.display = "none";
-    }
-
-    function keepMenuVisible(event) {
-        event.stopPropagation();
-    }
-
-    var menuBox = document.querySelector(".sub-menu");
-    menuBox.addEventListener("click", keepMenuVisible);
-</script>
-</body>
-</html>
+<header>
