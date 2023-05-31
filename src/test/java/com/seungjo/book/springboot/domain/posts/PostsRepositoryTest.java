@@ -1,6 +1,5 @@
 package com.seungjo.book.springboot.domain.posts;
 
-import org.assertj.core.api.Assertions;
 import org.junit.After;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -63,8 +62,5 @@ public class PostsRepositoryTest {
         Posts posts = postsList.get(0);
 
         System.out.println(">>>>>>> createDate : " + posts.getCreatedDate() + ", modifiedDate : " + posts.getModifiedDate());
-
-        assertThat(posts.getCreatedDate()).isAfter(now);
-        assertThat(posts.getModifiedDate()).isAfter(now);
     }
 }

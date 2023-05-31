@@ -1,9 +1,8 @@
 {{>layout/header}}
 
 <div class="header">
-
     {{#write}}
-        <a href="/posts/save" role="button"
+        <a href="/posts_notice/save" role="button"
            class="btn float-right btn-primary">글 등록</a>
     {{/write}}
 
@@ -15,7 +14,6 @@
     </div>
 
     <br>
-
     <!-- 목록 출력 영역 -->
     <table class="table table-horizontal table-bordered">
         <thead class="thead-strong">
@@ -27,16 +25,16 @@
         </tr>
         </thead>
         <tbody id="tbody">
-        {{#posts}}
+        {{#posts_notice}}
             <tr>
                 <td>{{id}}</td>
                 <td><a href="/posts/{{id}}">{{title}}</a></td>
                 <td>{{author}}</td>
                 <td>{{modifiedDate}}</td>
             </tr>
-        {{/posts}}
+        {{/posts_notice}}
         </tbody>
     </table>
 </div>
 
-{{>layout/footer}}
+{{>layout/footer_notice}}

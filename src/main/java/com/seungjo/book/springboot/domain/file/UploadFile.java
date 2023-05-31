@@ -13,4 +13,3 @@ public class UploadFile {
         this.storeFileName = storeFileName;
     }
 }
-
