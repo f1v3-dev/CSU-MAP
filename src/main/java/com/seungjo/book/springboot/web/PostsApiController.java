@@ -3,6 +3,7 @@ package com.seungjo.book.springboot.web;
 
 import com.seungjo.book.springboot.service.file.FilesService;
 import com.seungjo.book.springboot.service.posts.PostsService;
+import com.seungjo.book.springboot.web.dto.FilesDto;
 import com.seungjo.book.springboot.web.dto.PostsResponseDto;
 import com.seungjo.book.springboot.web.dto.PostsSaveRequestDto;
 import com.seungjo.book.springboot.web.dto.PostsUpdateRequestDto;
@@ -32,19 +33,33 @@ public class PostsApiController {
         return "redirect:/posts/{postId}";
     }
 
-    @PutMapping("api/v1/posts/{id}")
+    @PutMapping("/api/v1/posts/{id}")
     public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto) {
         return postsService.update(id, requestDto);
     }
 
-    @GetMapping("api/v1/posts/{id}")
+    @GetMapping("/api/v1/posts/{id}")
     public PostsResponseDto findbyId(@PathVariable Long id) {
         return postsService.findById(id);
     }
 
-    @DeleteMapping("api/v1/posts/{id}")
+    @DeleteMapping("/api/v1/posts/{id}")
     public Long delete(@PathVariable Long id){
         postsService.delete(id);
+        filesService.delete(id);
+        return id;
+    }
+
+    @DeleteMapping("/api/v1/posts/file/{id}")
+    public Long fileDelete(@PathVariable Long id,
+                           @RequestParam("fileName") String originalFileName,
+                           @RequestParam("fileId") Long fileId) {
+        System.out.print("id = " + id);
+        System.out.println(" originalFileName = " + originalFileName);
+        System.out.println("fileId = " + fileId);
+
+        filesService.deleteFile(id, originalFileName, fileId);
+
         return id;
     }
 }

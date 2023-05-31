@@ -85,9 +85,7 @@ public class IndexController {
 
         PostsResponseDto dto = postsService.findById(id);
         List<Files> filesList = filesService.findByPostId(id);
-        for (Files files : filesList) {
-            System.out.println("files.getSavedFileName() = " + files.getSavedFileName());
-        }
+
         if (dto.getUuid() != null && user.getUuid() != null && dto.getUuid().equals(user.getUuid())){
             model.addAttribute("loginUserName", user.getName());
             model.addAttribute("equalUuid", user.getUuid());
@@ -128,13 +126,13 @@ public class IndexController {
         }
 
         PostsResponseDto dto = postsService.findById(id);
-        System.out.println("dto.getUuid() = " + dto.getUuid());
-        System.out.println("user.getUuid() = " + user.getUuid());
+        List<Files> filesList = filesService.findByPostId(id);
 
         if (dto.getUuid() != null && user.getUuid() != null && dto.getUuid().equals(user.getUuid())){
             model.addAttribute("equalUuid", user.getUuid());
         }
         model.addAttribute("post", dto);
+        model.addAttribute("filesList", filesList);
 
         return "post/posts-update";
     }
