@@ -12,6 +12,9 @@ var main = {
         $('#btn-delete').on('click', function () {
             _this.delete();
         });
+        $('.btn-file-delete').on('click', function () {
+            _this.file_delete();
+        })
     },
     save : function () {
 
@@ -67,6 +70,29 @@ var main = {
         }).fail(function (error) {
             alert(JSON.stringify(error));
         });
+    },
+    file_delete : function () {
+        if(confirm("정말로 삭제하시겠습니까?")){
+            var fileId = $(this).data('file-id');
+            // var fileName = $.trim($('.file-name').text()); // 이미지 파일 정보 가져오기
+            var id = $('#id').val();
+
+            var fileName = $.trim($('.file-name')[fileId].text())
+
+
+            $.ajax({
+                type: 'DELETE',
+                url: '/api/v1/posts/file/' + id,
+                processData: false,
+                contentType: 'application/json',
+                data: JSON.stringify(data)
+            }).done(function() {
+                alert('파일이 삭제되었습니다.');
+                window.location.href = '/posts/update/' + id;
+            }).fail(function (error) {
+                alert(JSON.stringify(error));
+            });
+        }
     }
 };
 

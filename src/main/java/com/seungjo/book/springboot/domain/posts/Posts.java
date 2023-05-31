@@ -32,8 +32,6 @@ public class Posts extends BaseTimeEntity {
         this.content = content;
         this.author = author;
         this.uuid = uuid;
-        //this.originalFileName = originalFileName;
-        //this.savedFileName = savedFileName;
     }
 
     public void update(String title, String content){

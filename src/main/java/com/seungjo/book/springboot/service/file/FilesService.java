@@ -3,7 +3,9 @@ package com.seungjo.book.springboot.service.file;
 import com.seungjo.book.springboot.domain.file.FilesRepository;
 import com.seungjo.book.springboot.domain.file.Files;
 import com.seungjo.book.springboot.domain.file.UploadFile;
+import com.seungjo.book.springboot.domain.posts.Posts;
 import com.seungjo.book.springboot.web.dto.FilesDto;
+import com.seungjo.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -40,6 +42,37 @@ public class FilesService {
             }
         }
         return storeFileResult;
+    }
+
+//    @Transactional
+//    public Long update(Long postId, FilesDto filesDto) {
+//        List<Files> files = filesRepository.findByPostId(postId);
+//
+//        files.update(filesDto.get)
+//
+//        return id;
+//    }
+
+    @Transactional
+    public void delete (Long postId) {
+        List<Files> files = filesRepository.findByPostId(postId);
+        for (Files file : files) {
+            filesRepository.delete(file);
+        }
+    }
+
+    @Transactional
+    public void deleteFile (Long postId, String originalFileName, Long fileId) {
+        List<Files> files = filesRepository.findByPostId(postId);
+        for (Files file : files) {
+            System.out.println("file.originalFileName = " + file.getOriginalFileName());
+            System.out.println("originalFileName = " + originalFileName);
+            if (file.getOriginalFileName().equals(originalFileName) && file.getId().equals(fileId)){
+                System.out.println("file.getOriginalFileName() = " + file.getOriginalFileName());
+                filesRepository.delete(file);
+                break;
+            }
+        }
     }
 
     public UploadFile storeFile(MultipartFile multipartFile, Long postId) throws IOException {
