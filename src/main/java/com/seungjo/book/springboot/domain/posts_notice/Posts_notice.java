@@ -1,4 +1,4 @@
-package com.seungjo.book.springboot.domain.posts;
+package com.seungjo.book.springboot.domain.posts_notice;
 
 import com.seungjo.book.springboot.domain.BaseTimeEntity;
 import lombok.Builder;
@@ -10,8 +10,7 @@ import javax.persistence.*;
 @Getter
 @NoArgsConstructor
 @Entity
-public class Posts extends BaseTimeEntity {
-
+public class Posts_notice extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,7 +26,7 @@ public class Posts extends BaseTimeEntity {
     private String uuid;
 
     @Builder
-    public Posts(String title, String content, String author, String uuid){
+    public Posts_notice(String title, String content, String author, String uuid){
         this.title = title;
         this.content = content;
         this.author = author;
