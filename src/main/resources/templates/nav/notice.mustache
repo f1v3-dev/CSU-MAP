@@ -1,10 +1,6 @@
 {{>layout/header}}
 
 <div class="header">
-    {{#write}}
-        <a href="/posts_notice/save" role="button"
-           class="btn float-right btn-primary">글 등록</a>
-    {{/write}}
 
     <div class="center">
         <form action="/posts/search" method="GET" class="form-inline p-2 bd-highlight" role="search">
@@ -13,28 +9,37 @@
         </form>
     </div>
 
-    <br>
-    <!-- 목록 출력 영역 -->
-    <table class="table table-horizontal table-bordered">
-        <thead class="thead-strong">
-        <tr>
-            <th>게시글번호</th>
-            <th>제목</th>
-            <th>작성자</th>
-            <th>최종수정일</th>
-        </tr>
-        </thead>
-        <tbody id="tbody">
-        {{#posts_notice}}
+    <div class="col-md-12">
+        <div class="row">
+            {{#write}}
+                <a href="/posts_notice/save" role="button"
+                   class="btn float-right btn-primary">글 등록</a>
+            {{/write}}
+        </div>
+
+        <br>
+        <!-- 목록 출력 영역 -->
+        <table class="table table-horizontal table-bordered">
+            <thead class="thead-strong">
             <tr>
-                <td>{{id}}</td>
-                <td><a href="/posts/{{id}}">{{title}}</a></td>
-                <td>{{author}}</td>
-                <td>{{modifiedDate}}</td>
+                <th>게시글번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>최종수정일</th>
             </tr>
-        {{/posts_notice}}
-        </tbody>
-    </table>
+            </thead>
+            <tbody id="tbody">
+            {{#posts_notice}}
+                <tr>
+                    <td>{{id}}</td>
+                    <td><a href="/posts/{{id}}">{{title}}</a></td>
+                    <td>{{author}}</td>
+                    <td>{{modifiedDate}}</td>
+                </tr>
+            {{/posts_notice}}
+            </tbody>
+        </table>
+    </div>
 </div>
 
 {{>layout/footer_notice}}

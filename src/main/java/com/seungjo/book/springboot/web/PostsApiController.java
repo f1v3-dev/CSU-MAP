@@ -3,19 +3,15 @@ package com.seungjo.book.springboot.web;
 
 import com.seungjo.book.springboot.service.file.FilesService;
 import com.seungjo.book.springboot.service.posts.PostsService;
-import com.seungjo.book.springboot.web.dto.FilesDto;
-import com.seungjo.book.springboot.web.dto.PostsResponseDto;
-import com.seungjo.book.springboot.web.dto.PostsSaveRequestDto;
-import com.seungjo.book.springboot.web.dto.PostsUpdateRequestDto;
+import com.seungjo.book.springboot.web.dto.postDto.PostsResponseDto;
+import com.seungjo.book.springboot.web.dto.postDto.PostsSaveRequestDto;
+import com.seungjo.book.springboot.web.dto.postDto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.springframework.core.io.Resource;
-import org.springframework.core.io.UrlResource;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 
 @RequiredArgsConstructor
 @RestController

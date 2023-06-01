@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("/building")
 public class BuildingsController {
 
-    @GetMapping({"/IT","/IT/{floor}"})
+    @GetMapping({"/IT", "/IT/{floor}"})
     public String ITPage(Model model, @PathVariable(required = false) Integer floor) {
         if(floor != null) {
             model.addAttribute("floor", floor);

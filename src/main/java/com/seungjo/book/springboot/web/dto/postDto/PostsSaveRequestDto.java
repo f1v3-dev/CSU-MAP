@@ -1,7 +1,8 @@
-package com.seungjo.book.springboot.web.dto.notice;
+package com.seungjo.book.springboot.web.dto.postDto;
 
 import com.seungjo.book.springboot.domain.posts.Posts;
-import com.seungjo.book.springboot.domain.posts_notice.Posts_notice;
+import com.seungjo.book.springboot.domain.file.UploadFile;
+
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,7 +16,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Posts_noticeSaveRequestDto {
+public class PostsSaveRequestDto {
     private String uuid;
     @NotBlank(message = "제목을 입력해주세요")
     private String title;
@@ -28,7 +29,7 @@ public class Posts_noticeSaveRequestDto {
 
 
     @Builder
-    public Posts_noticeSaveRequestDto(String uuid, String title, String content, String author, List<MultipartFile> imageFiles) throws IOException {
+    public PostsSaveRequestDto(String uuid, String title, String content, String author, List<MultipartFile> imageFiles) throws IOException {
         this.uuid = uuid;
         this.title = title;
         this.content = content;
@@ -37,8 +38,8 @@ public class Posts_noticeSaveRequestDto {
 
     }
 
-    public Posts_notice toEntity(){
-        return Posts_notice.builder()
+    public Posts toEntity(){
+        return Posts.builder()
                 .title(title)
                 .content(content)
                 .author(author)

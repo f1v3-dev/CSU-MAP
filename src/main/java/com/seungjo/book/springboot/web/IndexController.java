@@ -12,8 +12,8 @@ import com.seungjo.book.springboot.domain.user.UserRepository;
 import com.seungjo.book.springboot.service.file.FilesService;
 import com.seungjo.book.springboot.service.posts.PostsService;
 import com.seungjo.book.springboot.service.posts_noticeService.Posts_noticeService;
-import com.seungjo.book.springboot.web.dto.PostsResponseDto;
-import com.seungjo.book.springboot.web.dto.notice.Posts_noticeResponseDto;
+import com.seungjo.book.springboot.web.dto.postDto.PostsResponseDto;
+import com.seungjo.book.springboot.web.dto.noticeDto.Posts_noticeResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -80,7 +80,7 @@ public class IndexController {
         return "post_notice/posts_notice-save";
     }
 
-    @GetMapping("posts/{id}")
+    @GetMapping("/posts/{id}")
     public String posts(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
 
         PostsResponseDto dto = postsService.findById(id);
@@ -95,7 +95,7 @@ public class IndexController {
 
         return "post/posts-view";
     }
-    @GetMapping("posts_notice/{id}")
+    @GetMapping("/posts_notice/{id}")
     public String posts_notice(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
 
         Posts_noticeResponseDto dto = posts_noticeService.findById(id);
@@ -214,6 +214,7 @@ public class IndexController {
             model.addAttribute("loginUserName", user.getName());
         }
         model.addAttribute("posts", postsService.findAllDesc());
+//        model.addAttribute("files", filesService.findAllDesc());
 
         return "nav/find";
     }

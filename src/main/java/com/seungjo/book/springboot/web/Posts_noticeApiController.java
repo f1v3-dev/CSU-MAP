@@ -2,9 +2,9 @@ package com.seungjo.book.springboot.web;
 
 import com.seungjo.book.springboot.service.file.FilesService;
 import com.seungjo.book.springboot.service.posts_noticeService.Posts_noticeService;
-import com.seungjo.book.springboot.web.dto.notice.Posts_noticeResponseDto;
-import com.seungjo.book.springboot.web.dto.notice.Posts_noticeSaveRequestDto;
-import com.seungjo.book.springboot.web.dto.notice.Posts_noticeUpdateRequestDto;
+import com.seungjo.book.springboot.web.dto.noticeDto.Posts_noticeResponseDto;
+import com.seungjo.book.springboot.web.dto.noticeDto.Posts_noticeSaveRequestDto;
+import com.seungjo.book.springboot.web.dto.noticeDto.Posts_noticeUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.*;
