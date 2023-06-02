@@ -9,38 +9,40 @@
         </form>
     </div>
 
-    <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-12">
-                <a href="/posts/save" role="button"
-                   class="btn float-right btn-primary">글 등록</a>
+    <div class="container" style="display: block;">
+            <div class="row">
+                <div class="col-md-12">
+                    <a href="/posts/save" role="button" id="postButtonWrapper"
+                       class="btn float-right btn-primary">글 등록</a>
+                </div>
             </div>
-        </div>
-        <br>
+            <br>
 
-        <!-- 목록 출력 영역 -->
-        <table class="table table-horizontal table-bordered">
-            <thead class="thead-strong">
-            <tr>
-                <th>분실물 이미지</th>
-                <th>게시글번호</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>최종수정일</th>
-            </tr>
-            </thead>
-            {{#posts}}
+            <!-- 목록 출력 영역 -->
+            <table class="table table-horizontal table-bordered">
+                <thead class="thead-strong">
                 <tr>
-                    <td>이미지 테스트</td>
-                    <td>{{id}}</td>
-                    <td><a href="/posts/{{id}}">{{title}}</a></td>
-                    <td>{{author}}</td>
-                    <td>{{modifiedDate}}</td>
+                    <th>분실물 이미지</th>
+                    <th>게시글번호</th>
+                    <th>제목</th>
+                    <th>작성자</th>
+                    <th>최종수정일</th>
                 </tr>
-            {{/posts}}
-            <tbody id="tbody">
-            </tbody>
-        </table>
+                </thead>
+                {{#posts}}
+                    <tr>
+                        <td>이미지 테스트</td>
+                        <td>{{id}}</td>
+                        <td><a href="/posts/{{id}}">{{title}}</a></td>
+                        <td>{{author}}</td>
+                        <td>{{modifiedDate}}</td>
+                    </tr>
+                {{/posts}}
+                <tbody id="tbody">
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
+
 {{>layout/footer}}
