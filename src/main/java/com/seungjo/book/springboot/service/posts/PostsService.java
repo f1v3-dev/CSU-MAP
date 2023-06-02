@@ -5,6 +5,8 @@ import com.seungjo.book.springboot.domain.posts.PostsRepository;
 import com.seungjo.book.springboot.service.file.FilesService;
 import com.seungjo.book.springboot.web.dto.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
@@ -55,6 +57,10 @@ public class PostsService {
     @Transactional
     public List<Posts> search(String keyword) {
         return postsRepository.findByTitleContaining(keyword);
+    }
+    @Transactional
+    public Page<Posts> pageList(Pageable pageable) {
+        return postsRepository.findAll(pageable);
     }
 
 }

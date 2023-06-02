@@ -58,5 +58,21 @@
             </tbody>
         </table>
     </div>
+    {{! Page }}
+    <div class="pagination justify-content-center">
+        {{#hasPrev}}
+            <a href="?page={{previous}}" role="button" class="btn btn-lg bi bi-caret-left-square-fill">prev</a>
+        {{/hasPrev}}
+        {{^hasPrev}}
+            <a href="?page={{previous}}" role="button" class="btn btn-lg bi bi-caret-left-square-fill disabled" style="display: none">prev</a>
+        {{/hasPrev}}
+
+        {{#hasNext}}
+            <a href="?page={{next}}" role="button" class="btn btn-lg bi bi-caret-right-square-fill">next</a>
+        {{/hasNext}}
+        {{^hasNext}}
+            <a href="?page={{next}}" role="button" class="btn btn-lg bi bi-caret-right-square-fill disabled" style="display: none">next</a>
+        {{/hasNext}}
+    </div>
 </div>
 {{>layout/footer}}

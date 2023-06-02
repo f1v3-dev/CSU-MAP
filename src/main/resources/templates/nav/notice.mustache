@@ -17,16 +17,21 @@
         </tr>
         </thead>
         <tbody id="tbody">
-        {{#posts_notice}}
+        {{#resultList}}
             <tr>
                 <td>{{id}}</td>
-                <td><a href="/posts/update/{{id}}">{{title}}</a></td>
+                <td><a href="/posts/{{id}}">{{title}}</a></td>
                 <td>{{author}}</td>
                 <td>{{modifiedDate}}</td>
             </tr>
-        {{/posts_notice}}
+        {{/resultList}}
         </tbody>
     </table>
+    {{#arr}}
+        <tr>
+            <a href = "/notice?page={{.}}">{{.}}</a>
+        </tr>
+    {{/arr}}
 </div>
 
 {{>layout/footer_notice}}
