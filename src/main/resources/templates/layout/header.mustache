@@ -30,6 +30,7 @@
             padding: 10px;
             border-bottom: 3px solid #ccc;
             box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000; /* Added: Set a higher z-index to keep the navbar on top */
         }
 
         nav a {
@@ -134,10 +135,26 @@
             margin-left: auto;
         }
 
+        /* Added: Styles for sticky navigation */
+        .sticky-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: white;
+            overflow: hidden;
+            display: flex;
+            justify-content: flex-end;
+            padding: 10px;
+            border-bottom: 3px solid #ccc;
+            box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
     </style>
 </head>
 <body>
-<nav>
+<nav id="navbar">
     <a class="home" href="/">CSU MAP</a>
     <a href="/introduce">소개 페이지</a>
     <a href="/notice">공지사항</a>
@@ -205,4 +222,28 @@
 
     var menuBox = document.querySelector(".sub-menu");
     menuBox.addEventListener("click", keepMenuVisible);
+
+    // Added: Function to handle sticky navigation
+    function handleStickyNav() {
+        var navbar = document.getElementById("navbar");
+        var stickyNav = navbar.cloneNode(true);
+        stickyNav.id = "sticky-navbar";
+        stickyNav.classList.add("sticky-nav");
+        navbar.parentNode.insertBefore(stickyNav, navbar.nextSibling);
+        var lastScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+        window.addEventListener("scroll", function() {
+            var scrollPos = window.pageYOffset || document.documentElement.scrollTop;
+            if (scrollPos > lastScrollPos) {
+                stickyNav.style.transform = "translateY(-100%)";
+            } else {
+                stickyNav.style.transform = "translateY(0)";
+            }
+            lastScrollPos = scrollPos;
+        });
+    }
+
+    // Added: Call the function to enable sticky navigation
+    handleStickyNav();
 </script>
+</body>
+</html>
