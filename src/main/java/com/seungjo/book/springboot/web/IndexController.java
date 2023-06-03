@@ -12,11 +12,17 @@ import com.seungjo.book.springboot.domain.user.UserRepository;
 import com.seungjo.book.springboot.service.file.FilesService;
 import com.seungjo.book.springboot.service.posts.PostsService;
 import com.seungjo.book.springboot.service.posts_noticeService.Posts_noticeService;
-import com.seungjo.book.springboot.web.dto.postDto.PostsResponseDto;
-import com.seungjo.book.springboot.web.dto.noticeDto.Posts_noticeResponseDto;
+import com.seungjo.book.springboot.web.dto.PostsResponseDto;
+import com.seungjo.book.springboot.web.dto.notice.Posts_noticeResponseDto;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -24,11 +30,25 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+@Getter
+@Setter
+class list {
+    int var1;
+    int var2;
+    public list(int var1, int var2) {
+        this.var1 = var1;
+        this.var2 = var2;
+    }
+}
 
 @RequiredArgsConstructor
 @Controller
@@ -192,9 +212,9 @@ public class IndexController {
         return "nav/introduce";
     }
 
-    @GetMapping("/notice")
-    public String noticePage(Model model, @LoginUser SessionUser user){
 
+    @GetMapping("/notice")
+    public String noticePage(Model model, @LoginUser SessionUser user, @RequestParam(defaultValue = "0") int page){
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
 
@@ -203,21 +223,40 @@ public class IndexController {
                 model.addAttribute("write", userRole.get().getRole());
             }
         }
-        model.addAttribute("posts_notice", posts_noticeService.findAllDesc());
+        int size = 3;
+        Page<Posts_notice> resultList = posts_noticeService.getPostList(page, size);
+        int []numberList = new int[resultList.getTotalPages()];
+        /*list []numberList = new list[resultList.getTotalPages()];
+        for (int i=0; i<resultList.getTotalPages(); i++) {
+            numberList[i].setVar1(i);
+            numberList[i].setVar2(i+1);
+        }*/
+        for (int i=0; i<resultList.getTotalPages(); i++) {
+            numberList[i] = i+1;
+        }
+        List<Integer> arr = Arrays.stream(numberList).boxed().collect(Collectors.toList());
+        model.addAttribute("resultList", resultList);
+        model.addAttribute("arr", arr);
+        model.addAttribute("totalPages", resultList.getTotalPages());
+        model.addAttribute("page", page);
+        model.addAttribute("size", size);
         return "nav/notice";
     }
 
     @GetMapping("/find")
-    public String findPage(Model model, @LoginUser SessionUser user) {
+    public String findPage(Model model, @LoginUser SessionUser user, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
 
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
         }
-        model.addAttribute("posts", postsService.findAllDesc());
-//        model.addAttribute("files", filesService.findAllDesc());
+        //model.addAttribute("posts", postsService.findAllDesc());
+        Page<Posts> list = postsService.pageList(pageable);
+        model.addAttribute("posts", list);
+        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
+        model.addAttribute("next", pageable.next().getPageNumber());
+        model.addAttribute("hasNext", list.hasNext());
+        model.addAttribute("hasPrev", list.hasPrevious());
 
         return "nav/find";
     }
-
-
 }

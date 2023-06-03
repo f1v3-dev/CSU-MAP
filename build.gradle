@@ -12,6 +12,8 @@ buildscript {
     }
 }
 
+
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
@@ -21,7 +23,7 @@ group 'com.seungjo.book'
 version '1.0.1-SNAPSHOT-' + new Date().format("yyyy-MM-dd HH:mm:ss")
 sourceCompatibility = 1.8
 
-//sourceCompatibility = 1.8
+
 
 repositories {
     mavenCentral()
