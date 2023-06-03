@@ -3,7 +3,7 @@ package com.seungjo.book.springboot.service.posts_noticeService;
 import com.seungjo.book.springboot.domain.posts_notice.Posts_notice;
 import com.seungjo.book.springboot.domain.posts_notice.Posts_noticeRepository;
 import com.seungjo.book.springboot.service.file.FilesService;
-import com.seungjo.book.springboot.web.dto.notice.*;
+import com.seungjo.book.springboot.web.dto.noticeDto.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

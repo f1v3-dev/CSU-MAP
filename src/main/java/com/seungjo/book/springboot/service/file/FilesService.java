@@ -3,9 +3,7 @@ package com.seungjo.book.springboot.service.file;
 import com.seungjo.book.springboot.domain.file.FilesRepository;
 import com.seungjo.book.springboot.domain.file.Files;
 import com.seungjo.book.springboot.domain.file.UploadFile;
-import com.seungjo.book.springboot.domain.posts.Posts;
 import com.seungjo.book.springboot.web.dto.FilesDto;
-import com.seungjo.book.springboot.web.dto.PostsUpdateRequestDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Value;
