@@ -1,6 +1,5 @@
 {{>layout/header}}
 
-
 <div class="header">
     <div class="center">
         <form action="/posts/search" method="GET" class="form-inline p-2 bd-highlight" role="search">
@@ -9,39 +8,39 @@
         </form>
     </div>
 
-    <div class="container" style="display: block;">
-            <div class="row">
-                <div class="col-md-12">
-                    <a href="/posts/save" role="button" id="postButtonWrapper"
-                       class="btn float-right btn-primary">글 등록</a>
-                </div>
+    <div class="col-md-12">
+        <div class="row" style="float: right; margin: 15px;">
+                <a href="/posts_notice/save" role="button"
+                   class="btn float-right btn-primary">글 등록</a>
             </div>
-            <br>
 
-            <!-- 목록 출력 영역 -->
-            <table class="table table-horizontal table-bordered">
-                <thead class="thead-strong">
-                <tr>
-                    <th>분실물 이미지</th>
-                    <th>게시글번호</th>
-                    <th>제목</th>
-                    <th>작성자</th>
-                    <th>최종수정일</th>
-                </tr>
-                </thead>
-                {{#posts}}
-                    <tr>
-                        <td>이미지 테스트</td>
-                        <td>{{id}}</td>
-                        <td><a href="/posts/{{id}}">{{title}}</a></td>
-                        <td>{{author}}</td>
-                        <td>{{modifiedDate}}</td>
-                    </tr>
-                {{/posts}}
-                <tbody id="tbody">
-                </tbody>
-            </table>
         </div>
+
+        <br>
+        <!-- 목록 출력 영역 -->
+        <table class="table table-horizontal table-bordered">
+            <thead class="thead-strong">
+            <tr>
+                <th>분실물 이미지</th>
+                <th>게시글번호</th>
+                <th>제목</th>
+                <th>작성자</th>
+                <th>최종수정일</th>
+            </tr>
+            </thead>
+
+            <tbody id="tbody">
+            {{#posts_notice}}
+                <tr>
+                    <td>이미지 테스트</td>
+                    <td>{{id}}</td>
+                    <td><a href="/posts/{{id}}">{{title}}</a></td>
+                    <td>{{author}}</td>
+                    <td>{{modifiedDate}}</td>
+                </tr>
+            {{/posts_notice}}
+            </tbody>
+        </table>
     </div>
 </div>
 
