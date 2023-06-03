@@ -1,9 +1,70 @@
 {{>layout/header}}
-{{#floor}}
-    <img src="/images/IT/IT_{{floor}}.png">
-{{/floor}}
-{{^floor}}
-    <img src="/images/IT/IT.png">
-{{/floor}}
+
+<style>
+    .building_IT {
+        margin-top: 100px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin-bottom: 30px; /* Added: Add margin to the bottom */
+    }
+
+
+    .floor {
+        margin-top: 50px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 10px;
+        height: 40px; /* 필요에 따라 값을 조정하세요 */
+    }
+
+    .floor a {
+        margin: 0 5px;
+        padding: 5px 10px;
+        background-color: #ccc;
+        color: #fff;
+        text-decoration: none;
+        border-radius: 5px;
+        line-height: 1.5;
+    }
+
+    .floor a:hover {
+        background-color: #2980b9;
+    }
+
+    .building_IT img {
+        max-width: 100%;
+        max-height: 100%;
+    }
+</style>
+
+<div class="building_IT">
+    <div class="floor">
+        <a href="/building/IT/1">1층</a>
+        <a href="/building/IT/2">2층</a>
+        <a href="/building/IT/3">3층</a>
+        <a href="/building/IT/4">4층</a>
+        <a href="/building/IT/5">5층</a>
+        <a href="/building/IT/6">6층</a>
+        <a href="/building/IT/7">7층</a>
+        <a href="/building/IT/8">8층</a>
+        <a href="/building/IT/9">9층</a>
+        <a href="/building/IT/10">10층</a>
+    </div>
+
+    <br>
+
+    {{#floor}}
+        <img src="/images/IT/IT_{{floor}}.png">
+    {{/floor}}
+    {{^floor}}
+        <a href="">
+            <img src="/images/IT/IT.png">
+        </a>
+    {{/floor}}
+</div>
 
 {{>layout/footer}}

@@ -100,7 +100,7 @@ public class IndexController {
         return "post_notice/posts_notice-save";
     }
 
-    @GetMapping("posts/{id}")
+    @GetMapping("/posts/{id}")
     public String posts(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
 
         PostsResponseDto dto = postsService.findById(id);
@@ -115,7 +115,7 @@ public class IndexController {
 
         return "post/posts-view";
     }
-    @GetMapping("posts_notice/{id}")
+    @GetMapping("/posts_notice/{id}")
     public String posts_notice(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
 
         Posts_noticeResponseDto dto = posts_noticeService.findById(id);
@@ -259,6 +259,7 @@ public class IndexController {
         model.addAttribute("next", pageable.next().getPageNumber());
         model.addAttribute("hasNext", list.hasNext());
         model.addAttribute("hasPrev", list.hasPrevious());
+
         return "nav/find";
     }
 }

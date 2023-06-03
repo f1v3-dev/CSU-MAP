@@ -1,22 +1,6 @@
 {{>layout/header}}
 
-<style>
-    .center {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-</style>
-
 <div class="header">
-
-<!--    <div class="center">-->
-<!--        <form action="/posts/search" method="GET" class="form-inline p-2 bd-highlight" role="search">-->
-<!--            <input type="text" name="keyword" class="form-control" id="search" placeholder="검색" style="width: 300px>-->
-<!--            <button class="btn btn-success bi bi-search">검색</button>-->
-<!--        </form>-->
-<!--    </div>-->
-
     <div class="center">
         <form action="/posts/search" method="GET" class="form-inline p-2 bd-highlight" role="search">
             <input type="text" name="keyword" class="form-control" id="search" placeholder="검색" style="width: 300px">
@@ -25,15 +9,13 @@
     </div>
 
     <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-12">
-                <a href="/posts/save" role="button"
+        <div class="row" style="float: right; margin: 15px;">
+                <a href="/posts_notice/save" role="button"
                    class="btn float-right btn-primary">글 등록</a>
-<!--                <a href="/login" class="btn float-right btn-light active" style="margin-right: 10px"; role="button">-->
-<!--                    로그인-->
-<!--                </a>-->
             </div>
+
         </div>
+
         <br>
         <!-- 목록 출력 영역 -->
         <table class="table table-horizontal table-bordered">
@@ -46,15 +28,17 @@
                 <th>최종수정일</th>
             </tr>
             </thead>
-            {{#posts}}
+
+            <tbody id="tbody">
+            {{#posts_notice}}
                 <tr>
+                    <td>이미지 테스트</td>
                     <td>{{id}}</td>
-                    <td><a href="/posts/update/{{id}}">{{title}}</a></td>
+                    <td><a href="/posts/{{id}}">{{title}}</a></td>
                     <td>{{author}}</td>
                     <td>{{modifiedDate}}</td>
                 </tr>
-            {{/posts}}
-            <tbody id="tbody">
+            {{/posts_notice}}
             </tbody>
         </table>
     </div>
@@ -75,4 +59,5 @@
         {{/hasNext}}
     </div>
 </div>
+
 {{>layout/footer}}

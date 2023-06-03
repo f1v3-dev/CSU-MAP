@@ -1,4 +1,4 @@
-package com.seungjo.book.springboot.web.dto.notice;
+package com.seungjo.book.springboot.web.dto.noticeDto;
 
 import lombok.Builder;
 import lombok.Getter;

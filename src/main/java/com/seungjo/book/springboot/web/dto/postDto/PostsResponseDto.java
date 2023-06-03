@@ -1,4 +1,4 @@
-package com.seungjo.book.springboot.web.dto;
+package com.seungjo.book.springboot.web.dto.postDto;
 
 import com.seungjo.book.springboot.domain.posts.Posts;
 import lombok.Getter;

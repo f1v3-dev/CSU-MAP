@@ -1,20 +1,22 @@
-package com.seungjo.book.springboot.web.dto.notice;
+package com.seungjo.book.springboot.web.dto.noticeDto;
 
-import com.seungjo.book.springboot.domain.posts.Posts;
 import com.seungjo.book.springboot.domain.posts_notice.Posts_notice;
 import lombok.Getter;
 
 @Getter
-public class Posts_noticeListResponseDto {
+public class Posts_noticeResponseDto {
+
     private Long id;
     private String title;
+    private String content;
     private String author;
-    private String modifiedDate;
+    private String uuid;
 
-    public Posts_noticeListResponseDto(Posts_notice entity) {
+    public Posts_noticeResponseDto(Posts_notice entity) {
+        this.uuid = entity.getUuid();
         this.id = entity.getId();
         this.title = entity.getTitle();
+        this.content = entity.getContent();
         this.author = entity.getAuthor();
-        this.modifiedDate = entity.getModifiedDate();
     }
 }

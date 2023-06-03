@@ -38,3 +38,6 @@ out/
 
 ### oauth2 ###
 application-oauth.properties
+
+### file directory ###
+src/main/resources/static/files/
