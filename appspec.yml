@@ -3,8 +3,7 @@ os: linux
 files:
   - source: /
     destination: /home/ec2-user/app/step3/zip/
-
-file_exists_behavior: OVERWRITE  # overwrite: yes 대신 이 옵션으로 대체
+    overwrite: yes
 
 permissions:
   - object: /
@@ -14,15 +13,14 @@ permissions:
 
 hooks:
   ApplicationInstall:
-    - location: stop.sh   # nginx와 연결되어 있찌 않은 스프링 부트 종료
+    - location: stop.sh
       timeout: 60
       runas: ec2-user
   ApplicationStart:
-    - location: start.sh  # nginx와 연결되어 있지 않은 Port로 새 버전의 스프링 부트 실행
-
+    - location: start.sh
       timeout: 60
       runas: ec2-user
   ValidateService:
-    - location: health.sh # 새 스프링 부트가 정상적으로 실행되었는지 검증
+    - location: health.sh
       timeout: 60
       runas: ec2-user
