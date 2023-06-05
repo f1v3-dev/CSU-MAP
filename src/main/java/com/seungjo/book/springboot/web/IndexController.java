@@ -12,8 +12,8 @@ import com.seungjo.book.springboot.domain.user.UserRepository;
 import com.seungjo.book.springboot.service.file.FilesService;
 import com.seungjo.book.springboot.service.posts.PostsService;
 import com.seungjo.book.springboot.service.posts_noticeService.Posts_noticeService;
-import com.seungjo.book.springboot.web.dto.postDto.PostsResponseDto;
 import com.seungjo.book.springboot.web.dto.noticeDto.Posts_noticeResponseDto;
+import com.seungjo.book.springboot.web.dto.postDto.PostsResponseDto;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
@@ -226,20 +226,23 @@ public class IndexController {
         int size = 3;
         Page<Posts_notice> resultList = posts_noticeService.getPostList(page, size);
         int []numberList = new int[resultList.getTotalPages()];
-        /*list []numberList = new list[resultList.getTotalPages()];
         for (int i=0; i<resultList.getTotalPages(); i++) {
-            numberList[i].setVar1(i);
-            numberList[i].setVar2(i+1);
-        }*/
-        for (int i=0; i<resultList.getTotalPages(); i++) {
-            numberList[i] = i+1;
+            numberList[i] = i;
         }
+
+        List<list> arr3 = new ArrayList<>();
+        for (int i=0; i<resultList.getTotalPages(); i++) {
+            arr3.add(new list(i, i+1));
+        }
+
         List<Integer> arr = Arrays.stream(numberList).boxed().collect(Collectors.toList());
+
         model.addAttribute("resultList", resultList);
         model.addAttribute("arr", arr);
-        model.addAttribute("totalPages", resultList.getTotalPages());
-        model.addAttribute("page", page);
-        model.addAttribute("size", size);
+        model.addAttribute("arr3", arr3);
+//        model.addAttribute("totalPages", resultList.getTotalPages());
+//        model.addAttribute("page", page);
+//        model.addAttribute("size", size);
         return "nav/notice";
     }
 

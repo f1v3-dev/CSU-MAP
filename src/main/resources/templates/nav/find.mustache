@@ -10,7 +10,7 @@
 
     <div class="col-md-12">
         <div class="row" style="float: right; margin: 15px;">
-                <a href="/posts_notice/save" role="button"
+                <a href="/posts/save" role="button"
                    class="btn float-right btn-primary">글 등록</a>
             </div>
 
@@ -30,7 +30,7 @@
             </thead>
 
             <tbody id="tbody">
-            {{#posts_notice}}
+            {{#posts}}
                 <tr>
                     <td>이미지 테스트</td>
                     <td>{{id}}</td>
@@ -38,7 +38,7 @@
                     <td>{{author}}</td>
                     <td>{{modifiedDate}}</td>
                 </tr>
-            {{/posts_notice}}
+            {{/posts}}
             </tbody>
         </table>
     </div>
