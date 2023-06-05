@@ -35,21 +35,13 @@ public class FilesService {
     public List<UploadFile> storeFiles(List<MultipartFile> multipartFiles, Long postId) throws IOException {
         List<UploadFile> storeFileResult = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
-            if (!multipartFile.isEmpty()) {
+            if (multipartFile != null && !multipartFile.isEmpty()) {
                 storeFileResult.add(storeFile(multipartFile, postId));
             }
         }
         return storeFileResult;
     }
 
-//    @Transactional
-//    public Long update(Long postId, FilesDto filesDto) {
-//        List<Files> files = filesRepository.findByPostId(postId);
-//
-//        files.update(filesDto.get)
-//
-//        return id;
-//    }
 
     @Transactional
     public void delete (Long postId) {
@@ -75,7 +67,7 @@ public class FilesService {
 
     public UploadFile storeFile(MultipartFile multipartFile, Long postId) throws IOException {
         if (multipartFile.isEmpty()) {
-            return null;
+//            return null;
         }
         String originalFilename = multipartFile.getOriginalFilename();
         String storeFileName = createStoreFileName(originalFilename);

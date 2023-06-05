@@ -16,10 +16,8 @@ public class Files extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
     private String originalFileName;
 
-    @Column
     private String savedFileName;
     private Long size;
     private Long postId;
