@@ -41,8 +41,11 @@ jobs:
       shell: bash
 
     - name: Get current time
-      run: echo "::set-output name=formattedTime::$(TZ=Asia/Seoul date +'%Y-%m-%dT%H-%M-%S')"
+      uses: 1466587594/get-current-time@v2.1.1
       id: current-time
+      with:
+        format: YYYY-MM-DDTHH-mm-ss
+        utcOffset: "+09:00"
 
     - name: Show Current Time
       run: echo "CurrentTime=${{steps.current-time.outputs.formattedTime}}"

@@ -1,3 +1,5 @@
+import java.time.ZonedDateTime
+import java.time.format.DateTimeFormatter
 
 buildscript {
     ext {
@@ -12,18 +14,15 @@ buildscript {
     }
 }
 
-
-
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
 apply plugin: 'io.spring.dependency-management'
 
 group 'com.seungjo.book'
-version '1.0.1-SNAPSHOT-' + new Date().format("yyyy-MM-dd HH:mm:ss")
+def formattedDate = ZonedDateTime.now().format(DateTimeFormatter.ofPattern('yyyy-MM-dd HH:mm:ss'))
+version "1.0.1-SNAPSHOT-${formattedDate}"
 sourceCompatibility = 1.8
-
-
 
 repositories {
     mavenCentral()
@@ -31,7 +30,6 @@ repositories {
 }
 
 dependencies {
-
     implementation('org.springframework.boot:spring-boot-starter-web')
     implementation('org.springframework.boot:spring-boot-starter-data-jpa')
     implementation('com.h2database:h2')
@@ -44,6 +42,4 @@ dependencies {
     annotationProcessor('org.projectlombok:lombok')
     testAnnotationProcessor('org.projectlombok:lombok')
     implementation('org.mariadb.jdbc:mariadb-java-client')
-
-
 }
