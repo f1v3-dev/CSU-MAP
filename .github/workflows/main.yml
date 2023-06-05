@@ -13,12 +13,11 @@ on:
   release:
     types: [push]   # push시 자동으로 실행됩니다.
   push:
-    branches: [master]    # main 브랜치에서 동작합니다.
+    branches: [master]    # master 브랜치에서 동작합니다.
   workflow_dispatch:      # 수동으로도 실행이 가능합니다.
 
 jobs:
   build:
-
     runs-on: ubuntu-latest # 해당 스크립트가 작동할 OS 설정
     permissions:
       contents: read
@@ -32,7 +31,7 @@ jobs:
       uses: actions/setup-java@v3
       with:
         java-version: '8'
-        distribution: 'temurin'
+        distribution: 'Lambda'
     
     - name: Grant execute permission for gradlew
       run: chmod +x ./gradlew # 실행권한(+x) 부여
