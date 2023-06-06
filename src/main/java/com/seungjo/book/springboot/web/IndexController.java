@@ -12,6 +12,7 @@ import com.seungjo.book.springboot.domain.user.UserRepository;
 import com.seungjo.book.springboot.service.file.FilesService;
 import com.seungjo.book.springboot.service.posts.PostsService;
 import com.seungjo.book.springboot.service.posts_noticeService.Posts_noticeService;
+import com.seungjo.book.springboot.web.dto.FileDto.FilesListResponseDto;
 import com.seungjo.book.springboot.web.dto.noticeDto.Posts_noticeResponseDto;
 import com.seungjo.book.springboot.web.dto.postDto.PostsResponseDto;
 import lombok.Getter;
@@ -247,18 +248,15 @@ public class IndexController {
     }
 
     @GetMapping("/find")
-    public String findPage(Model model, @LoginUser SessionUser user, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String findPage(Model model, @LoginUser SessionUser user) {
 
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
         }
-        //model.addAttribute("posts", postsService.findAllDesc());
-        Page<Posts> list = postsService.pageList(pageable);
-        model.addAttribute("posts", list);
-        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
-        model.addAttribute("next", pageable.next().getPageNumber());
-        model.addAttribute("hasNext", list.hasNext());
-        model.addAttribute("hasPrev", list.hasPrevious());
+        model.addAttribute("posts", postsService.findAllDesc());
+        List<FilesListResponseDto> firstImg = filesService.findFirstImg();
+
+        model.addAttribute("filesList", filesService.findFirstImg());
 
         return "nav/find";
     }

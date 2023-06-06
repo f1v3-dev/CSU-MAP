@@ -10,54 +10,51 @@
 
     <div class="col-md-12">
         <div class="row" style="float: right; margin: 15px;">
-                <a href="/posts/save" role="button"
-                   class="btn float-right btn-primary">글 등록</a>
-            </div>
-
+            <a href="/posts/save" role="button"
+               class="btn float-right btn-primary">글 등록</a>
         </div>
-
-        <br>
-        <!-- 목록 출력 영역 -->
-        <table class="table table-horizontal table-bordered">
-            <thead class="thead-strong">
-            <tr>
-                <th>분실물 이미지</th>
-                <th>게시글번호</th>
-                <th>제목</th>
-                <th>작성자</th>
-                <th>최종수정일</th>
-            </tr>
-            </thead>
-
-            <tbody id="tbody">
-            {{#posts}}
-                <tr>
-                    <td>이미지 테스트</td>
-                    <td>{{id}}</td>
-                    <td><a href="/posts/{{id}}">{{title}}</a></td>
-                    <td>{{author}}</td>
-                    <td>{{modifiedDate}}</td>
-                </tr>
-            {{/posts}}
-            </tbody>
-        </table>
     </div>
-    {{! Page }}
-    <div class="pagination justify-content-center">
-        {{#hasPrev}}
-            <a href="?page={{previous}}" role="button" class="btn btn-lg bi bi-caret-left-square-fill">prev</a>
-        {{/hasPrev}}
-        {{^hasPrev}}
-            <a href="?page={{previous}}" role="button" class="btn btn-lg bi bi-caret-left-square-fill disabled" style="display: none">prev</a>
-        {{/hasPrev}}
 
-        {{#hasNext}}
-            <a href="?page={{next}}" role="button" class="btn btn-lg bi bi-caret-right-square-fill">next</a>
-        {{/hasNext}}
-        {{^hasNext}}
-            <a href="?page={{next}}" role="button" class="btn btn-lg bi bi-caret-right-square-fill disabled" style="display: none">next</a>
-        {{/hasNext}}
+    <!-- 분실물 게시판 출력-->
+    <div class="album py-5 bg-body-tertiary">
+        <div class="container">
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+                {{#posts}}
+                    <div class="col" style="margin: 15px">
+                        <div class="card shadow-sm">
+                            <div class="thumbnail">
+                                {{#filesList}}
+                                    <img src="/images/{{savedFileName}}" width="300px" height="300px">
+                                {{/filesList}}
+                                {{^filesList}}
+                                    <div class="placeholder">
+                                        <svg class="bd-placeholder-img" width="100%" height="100%"
+                                             xmlns="http://www.w3.org/2000/svg"
+                                             preserveAspectRatio="xMidYMid slice" focusable="false">
+                                            <rect width="100%" height="100%" fill="#55595c"></rect>
+                                            <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
+                                        </svg>
+                                    </div>
+                                {{/filesList}}
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text" style="float: right; color: #6c757d;">{{author}}</p> <br>
+                                <p class="card-text">{{content}}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        <a class="btn btn-sm btn-outline-secondary" href="/posts/{{id}}">View</a>
+                                    </div>
+                                    <small class="text-body-secondary">{{modifiedDate}}</small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {{/posts}}
+            </div>
+        </div>
     </div>
+
+
 </div>
 
 {{>layout/footer}}

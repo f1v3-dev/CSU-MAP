@@ -3,7 +3,8 @@ package com.seungjo.book.springboot.service.file;
 import com.seungjo.book.springboot.domain.file.FilesRepository;
 import com.seungjo.book.springboot.domain.file.Files;
 import com.seungjo.book.springboot.domain.file.UploadFile;
-import com.seungjo.book.springboot.web.dto.FilesDto;
+import com.seungjo.book.springboot.web.dto.FileDto.FilesDto;
+import com.seungjo.book.springboot.web.dto.FileDto.FilesListResponseDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -100,6 +102,13 @@ public class FilesService {
     }
     public List<Files> findByPostId(Long postId) {
         return filesRepository.findByPostId(postId);
+    }
+
+    @Transactional
+    public List<FilesListResponseDto> findFirstImg() {
+        return filesRepository.findFirstImg().stream()
+                .map(FilesListResponseDto::new)
+                .collect(Collectors.toList());
     }
 
 }
