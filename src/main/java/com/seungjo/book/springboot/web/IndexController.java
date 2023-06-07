@@ -21,9 +21,6 @@ import lombok.Setter;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -255,6 +252,7 @@ public class IndexController {
         }
         model.addAttribute("posts", postsService.findAllDesc());
         List<FilesListResponseDto> firstImg = filesService.findFirstImg();
+
 
         model.addAttribute("filesList", filesService.findFirstImg());
 
