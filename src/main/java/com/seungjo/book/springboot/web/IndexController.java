@@ -14,9 +14,7 @@ import com.seungjo.book.springboot.service.posts.PostsService;
 import com.seungjo.book.springboot.service.posts_noticeService.Posts_noticeService;
 import com.seungjo.book.springboot.web.dto.noticeDto.Posts_noticeResponseDto;
 import com.seungjo.book.springboot.web.dto.postDto.PostsResponseDto;
-import lombok.Getter;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
@@ -35,20 +33,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.net.MalformedURLException;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
-@Getter
-@Setter
-class list {
-    int var1;
-    int var2;
-    public list(int var1, int var2) {
-        this.var1 = var1;
-        this.var2 = var2;
-    }
-}
 
 @RequiredArgsConstructor
 @Controller
@@ -225,24 +211,13 @@ public class IndexController {
         }
         int size = 3;
         Page<Posts_notice> resultList = posts_noticeService.getPostList(page, size);
-        int []numberList = new int[resultList.getTotalPages()];
+        List<PageList> arr = new ArrayList<>();
         for (int i=0; i<resultList.getTotalPages(); i++) {
-            numberList[i] = i;
+            arr.add(new PageList(i, i+1));
         }
-
-        List<list> arr3 = new ArrayList<>();
-        for (int i=0; i<resultList.getTotalPages(); i++) {
-            arr3.add(new list(i, i+1));
-        }
-
-        List<Integer> arr = Arrays.stream(numberList).boxed().collect(Collectors.toList());
-
         model.addAttribute("resultList", resultList);
         model.addAttribute("arr", arr);
-        model.addAttribute("arr3", arr3);
-//        model.addAttribute("totalPages", resultList.getTotalPages());
-//        model.addAttribute("page", page);
-//        model.addAttribute("size", size);
+
         return "nav/notice";
     }
 
@@ -252,8 +227,7 @@ public class IndexController {
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
         }
-        //model.addAttribute("posts", postsService.findAllDesc());
-        Page<Posts> list = postsService.pageList(pageable);
+               Page<Posts> list = postsService.pageList(pageable);
         model.addAttribute("posts", list);
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
         model.addAttribute("next", pageable.next().getPageNumber());
