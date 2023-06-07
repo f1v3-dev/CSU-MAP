@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @RequiredArgsConstructor
 @Controller
-@RequestMapping("/building")
+@RequestMapping("/buildings")
 public class BuildingsController {
 
     @GetMapping({"/IT", "/IT/{floor}"})

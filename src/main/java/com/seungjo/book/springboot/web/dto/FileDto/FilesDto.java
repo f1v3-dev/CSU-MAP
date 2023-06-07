@@ -1,6 +1,8 @@
-package com.seungjo.book.springboot.web.dto;
+package com.seungjo.book.springboot.web.dto.FileDto;
 
 import com.seungjo.book.springboot.domain.file.Files;
+import com.seungjo.book.springboot.domain.posts.Posts;
+import com.seungjo.book.springboot.domain.posts_notice.Posts_notice;
 import lombok.Builder;
 import lombok.Data;
 

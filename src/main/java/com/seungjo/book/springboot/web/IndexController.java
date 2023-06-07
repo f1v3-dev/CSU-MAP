@@ -12,15 +12,13 @@ import com.seungjo.book.springboot.domain.user.UserRepository;
 import com.seungjo.book.springboot.service.file.FilesService;
 import com.seungjo.book.springboot.service.posts.PostsService;
 import com.seungjo.book.springboot.service.posts_noticeService.Posts_noticeService;
+import com.seungjo.book.springboot.web.dto.FileDto.FilesListResponseDto;
 import com.seungjo.book.springboot.web.dto.noticeDto.Posts_noticeResponseDto;
 import com.seungjo.book.springboot.web.dto.postDto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.security.authentication.AnonymousAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -222,12 +220,13 @@ public class IndexController {
     }
 
     @GetMapping("/find")
-    public String findPage(Model model, @LoginUser SessionUser user, @PageableDefault(page = 0, size = 10, sort = "id", direction = Sort.Direction.DESC) Pageable pageable) {
+    public String findPage(Model model, @LoginUser SessionUser user) {
 
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
         }
-               Page<Posts> list = postsService.pageList(pageable);
+
+        Page<Posts> list = postsService.pageList(pageable);
         model.addAttribute("posts", list);
         model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
         model.addAttribute("next", pageable.next().getPageNumber());

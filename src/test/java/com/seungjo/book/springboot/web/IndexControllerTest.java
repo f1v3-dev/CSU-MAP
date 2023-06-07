@@ -25,6 +25,6 @@ public class IndexControllerTest {
 
         System.out.println("body = " + body);
         // then
-//        assertThat(body).contains("CSU Classroom Finder");
+        assertThat(body).contains("index 페이지입니다.");
     }
 }

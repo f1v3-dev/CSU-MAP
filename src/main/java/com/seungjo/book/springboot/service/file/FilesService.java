@@ -3,7 +3,8 @@ package com.seungjo.book.springboot.service.file;
 import com.seungjo.book.springboot.domain.file.FilesRepository;
 import com.seungjo.book.springboot.domain.file.Files;
 import com.seungjo.book.springboot.domain.file.UploadFile;
-import com.seungjo.book.springboot.web.dto.FilesDto;
+import com.seungjo.book.springboot.web.dto.FileDto.FilesDto;
+import com.seungjo.book.springboot.web.dto.FileDto.FilesListResponseDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
@@ -35,21 +37,13 @@ public class FilesService {
     public List<UploadFile> storeFiles(List<MultipartFile> multipartFiles, Long postId) throws IOException {
         List<UploadFile> storeFileResult = new ArrayList<>();
         for (MultipartFile multipartFile : multipartFiles) {
-            if (!multipartFile.isEmpty()) {
+            if (multipartFile != null && !multipartFile.isEmpty()) {
                 storeFileResult.add(storeFile(multipartFile, postId));
             }
         }
         return storeFileResult;
     }
 
-//    @Transactional
-//    public Long update(Long postId, FilesDto filesDto) {
-//        List<Files> files = filesRepository.findByPostId(postId);
-//
-//        files.update(filesDto.get)
-//
-//        return id;
-//    }
 
     @Transactional
     public void delete (Long postId) {
@@ -75,7 +69,7 @@ public class FilesService {
 
     public UploadFile storeFile(MultipartFile multipartFile, Long postId) throws IOException {
         if (multipartFile.isEmpty()) {
-            return null;
+//            return null;
         }
         String originalFilename = multipartFile.getOriginalFilename();
         String storeFileName = createStoreFileName(originalFilename);
@@ -108,6 +102,13 @@ public class FilesService {
     }
     public List<Files> findByPostId(Long postId) {
         return filesRepository.findByPostId(postId);
+    }
+
+    @Transactional
+    public List<FilesListResponseDto> findFirstImg() {
+        return filesRepository.findFirstImg().stream()
+                .map(FilesListResponseDto::new)
+                .collect(Collectors.toList());
     }
 
 }

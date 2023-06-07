@@ -18,7 +18,6 @@ import java.util.stream.Collectors;
 @Service
 public class PostsService {
     private final PostsRepository postsRepository;
-    private final FilesService filesService;
 
     @Transactional
     public Long save(PostsSaveRequestDto requestDto) {
