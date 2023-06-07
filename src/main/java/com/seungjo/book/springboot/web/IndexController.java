@@ -225,14 +225,10 @@ public class IndexController {
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
         }
+        model.addAttribute("posts", postsService.findAllDesc());
+        List<FilesListResponseDto> firstImg = filesService.findFirstImg();
 
-        Page<Posts> list = postsService.pageList(pageable);
-        model.addAttribute("posts", list);
-        model.addAttribute("previous", pageable.previousOrFirst().getPageNumber());
-        model.addAttribute("next", pageable.next().getPageNumber());
-        model.addAttribute("hasNext", list.hasNext());
-        model.addAttribute("hasPrev", list.hasPrevious());
-
+        model.addAttribute("filesList", filesService.findFirstImg());
         return "nav/find";
     }
 }
