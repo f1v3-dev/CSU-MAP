@@ -212,16 +212,38 @@ public class IndexController {
                 model.addAttribute("write", userRole.get().getRole());
             }
         }
-        int size = 3;
+        int size = 10;
+        int page_size = 10;
         Page<Posts_notice> resultList = posts_noticeService.getPostList(page, size);
+        if (page > resultList.getTotalPages())
+            page = resultList.getTotalPages();
         List<PageList> arr = new ArrayList<>();
-        for (int i = 0; i < resultList.getTotalPages(); i++) {
-            arr.add(new PageList(i, i + 1));
+        int start = (page/page_size)*page_size;
+        int end = resultList.getTotalPages() < start+10 ? resultList.getTotalPages() : start+10;
+        for (int i=start; i<end; i++) {
+            arr.add(new PageList(i, i+1));
         }
         model.addAttribute("resultList", resultList);
         model.addAttribute("arr", arr);
 
+        if (start != 0) {
+            int prev = start-10;
+            model.addAttribute("hasPrev", true);
+            model.addAttribute("prev", prev);
+        }
+        else {
+            model.addAttribute("hasPrev", false);
+        }
+        if (start+10 < resultList.getTotalPages()) {
+            int next = start+10;
+            model.addAttribute("hasNext", true);
+            model.addAttribute("next", next);
+        }
+        else {
+            model.addAttribute("hasNext", false);
+        }
         return "nav/notice";
+
     }
 
     @GetMapping("/find")

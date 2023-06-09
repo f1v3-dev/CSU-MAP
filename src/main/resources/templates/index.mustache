@@ -1,17 +1,58 @@
 {{>layout/header}}
 <style>
     .center {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
         z-index: 1;
     }
+
+    .center img {
+        display: block;
+        margin: 0 auto;
+    }
+
+    /*포인터에 마우스 올렸을 때 주는 효과*/
+    .button:hover {
+        outline-color: transparent;
+        outline-style: solid;
+        box-shadow: 0 0 0 4px #0032a0; /* Red border */
+    }
+
+    .overlay-image1 {
+        position: absolute;
+        top: 5px; /* 이미지의 세로 위치를 50px 아래로 이동 */
+        left: 50%; /* 이미지의 가로 위치를 50%로 설정 */
+        /*transform: translateX(-50%); /* 이미지를 가운데 정렬 */
+        z-index: 2;
+        width: 75px; /* 이미지의 가로 크기 조절 */
+        height: 100px; /* 이미지의 세로 크기 자동 조정 */
+    }
+
+    .overlay-image2 {
+        position: absolute;
+        top: 20px; /* 이미지의 세로 위치를 50px 아래로 이동 */
+        left: 37%; /* 이미지의 가로 위치를 50%로 설정 */
+        /*transform: translateX(-50%); /* 이미지를 가운데 정렬 */
+        z-index: 2;
+        width: 60px; /* 이미지의 가로 크기 조절 */
+        height: 80px; /* 이미지의 세로 크기 자동 조정 */
+    }
+
+    .overlay-image3 {
+        position: absolute;
+        top: 100px; /* 이미지의 세로 위치를 50px 아래로 이동 */
+        left: 45%; /* 이미지의 가로 위치를 50%로 설정 */
+        /*transform: translateX(-50%); /* 이미지를 가운데 정렬 */
+        z-index: 2;
+        width: 60px; /* 이미지의 가로 크기 조절 */
+        height: 80px; /* 이미지의 세로 크기 자동 조정 */
+    }
+
 </style>
 
-
 <div class="header">
-    <br>
-    <br>
     <br>
     <div class="center">
         <form action="/posts/search" method="GET" class="form-inline p-2 bd-highlight" role="search">
@@ -31,6 +72,23 @@
         <p>
             index 페이지입니다.
         </p>
+        <div class="center">
+            <!-- 인덱스 페이지 배경 이미지 태그 -->
+            <img src="/images/map/map.jpg" alt="이미지_설명">
+            <!-- 포인터 이미지 클릭시 이동하는 페이지 경로 -->
+            <a href="/buildings/IT">
+                <!-- 배경이미지에 올라가는 포인터 이미지 태그 -->
+                <img src="/images/pointer/pointer1.png" alt="올려진_이미지" class="overlay-image1 button">
+            </a>
+            <a href="/buildings/IT">
+                <!-- 배경이미지에 올라가는 포인터 이미지 태그 -->
+                <img src="/images/pointer/pointer2.png" alt="올려진_이미지" class="overlay-image2 button">
+            </a>
+            <a href="/buildings/IT">
+                <!-- 배경이미지에 올라가는 포인터 이미지 태그 -->
+                <img src="/images/pointer/pointer3.png" alt="올려진_이미지" class="overlay-image3 button">
+            </a>
+        </div>
     </div>
 </div>
 {{>layout/footer}}

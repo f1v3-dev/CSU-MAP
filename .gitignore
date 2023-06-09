@@ -40,3 +40,4 @@ out/
 application-oauth.properties
 
 ### file directory ###
+src/main/resources/static/files/
