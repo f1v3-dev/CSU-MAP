@@ -3,8 +3,8 @@ package com.seungjo.book.springboot.service.file;
 import com.seungjo.book.springboot.domain.file.FilesRepository;
 import com.seungjo.book.springboot.domain.file.Files;
 import com.seungjo.book.springboot.domain.file.UploadFile;
-import com.seungjo.book.springboot.web.dto.FileDto.FilesDto;
-import com.seungjo.book.springboot.web.dto.FileDto.FilesListResponseDto;
+import com.seungjo.book.springboot.web.dto.fileDto.FilesDto;
+import com.seungjo.book.springboot.web.dto.fileDto.FilesListResponseDto;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -27,6 +27,10 @@ public class FilesService {
 
     public String getFullPath(String filename) {
         return fileDir + filename;
+    }
+
+    public String NoImage() {
+        return fileDir + "NoImage.jpg";
     }
 
     @Transactional

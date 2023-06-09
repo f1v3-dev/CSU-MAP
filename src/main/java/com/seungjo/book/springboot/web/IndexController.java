@@ -12,8 +12,10 @@ import com.seungjo.book.springboot.domain.user.UserRepository;
 import com.seungjo.book.springboot.service.file.FilesService;
 import com.seungjo.book.springboot.service.posts.PostsService;
 import com.seungjo.book.springboot.service.posts_noticeService.Posts_noticeService;
-import com.seungjo.book.springboot.web.dto.FileDto.FilesListResponseDto;
+import com.seungjo.book.springboot.web.dto.fileDto.FilesListResponseDto;
+import com.seungjo.book.springboot.web.dto.findDto.FindDto;
 import com.seungjo.book.springboot.web.dto.noticeDto.Posts_noticeResponseDto;
+import com.seungjo.book.springboot.web.dto.postDto.PostsListResponseDto;
 import com.seungjo.book.springboot.web.dto.postDto.PostsResponseDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.Resource;
@@ -30,9 +32,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.net.MalformedURLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Controller
@@ -44,7 +46,6 @@ public class IndexController {
 
     private final UserRepository userRepository;
     private final FilesService filesService;
-    private final PostsRepository postsRepository;
 
     private boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -57,7 +58,7 @@ public class IndexController {
 
     //@LoginUser를 사용하여 세션 정보를 가져옴
     @GetMapping("/")
-    public String index(Model model, @LoginUser SessionUser user){
+    public String index(Model model, @LoginUser SessionUser user) {
         model.addAttribute("posts", postsService.findAllDesc());
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
@@ -67,7 +68,7 @@ public class IndexController {
 
 
     @GetMapping("/posts/save")
-    public String postsSave(Model model, @LoginUser SessionUser user){
+    public String postsSave(Model model, @LoginUser SessionUser user) {
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
             model.addAttribute("uuidValue", user.getUuid());
@@ -76,7 +77,7 @@ public class IndexController {
     }
 
     @GetMapping("/posts_notice/save")
-    public String posts_noticeSave(Model model, @LoginUser SessionUser user){
+    public String posts_noticeSave(Model model, @LoginUser SessionUser user) {
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
             model.addAttribute("uuidValue", user.getUuid());
@@ -90,7 +91,7 @@ public class IndexController {
         PostsResponseDto dto = postsService.findById(id);
         List<Files> filesList = filesService.findByPostId(id);
 
-        if (dto.getUuid() != null && user.getUuid() != null && dto.getUuid().equals(user.getUuid())){
+        if (dto.getUuid() != null && user.getUuid() != null && dto.getUuid().equals(user.getUuid())) {
             model.addAttribute("loginUserName", user.getName());
             model.addAttribute("equalUuid", user.getUuid());
         }
@@ -99,6 +100,7 @@ public class IndexController {
 
         return "post/posts-view";
     }
+
     @GetMapping("/posts_notice/{id}")
     public String posts_notice(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
 
@@ -107,7 +109,7 @@ public class IndexController {
         for (Files files : filesList) {
             System.out.println("files.getSavedFileName() = " + files.getSavedFileName());
         }
-        if (dto.getUuid() != null && user.getUuid() != null && dto.getUuid().equals(user.getUuid())){
+        if (dto.getUuid() != null && user.getUuid() != null && dto.getUuid().equals(user.getUuid())) {
             model.addAttribute("loginUserName", user.getName());
             model.addAttribute("equalUuid", user.getUuid());
         }
@@ -120,11 +122,14 @@ public class IndexController {
     @ResponseBody
     @GetMapping("/images/{filename}")
     public Resource downloadImage(@PathVariable String filename) throws MalformedURLException {
+        if (filename.equals("NoImage")) {
+            return new UrlResource("file:" + filesService.NoImage());
+        }
         return new UrlResource("file:" + filesService.getFullPath(filename));
     }
 
     @GetMapping("/posts/update/{id}")
-    public String postsUpdate(@PathVariable Long id, Model model, @LoginUser SessionUser user){
+    public String postsUpdate(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
         }
@@ -132,7 +137,7 @@ public class IndexController {
         PostsResponseDto dto = postsService.findById(id);
         List<Files> filesList = filesService.findByPostId(id);
 
-        if (dto.getUuid() != null && user.getUuid() != null && dto.getUuid().equals(user.getUuid())){
+        if (dto.getUuid() != null && user.getUuid() != null && dto.getUuid().equals(user.getUuid())) {
             model.addAttribute("equalUuid", user.getUuid());
         }
         model.addAttribute("post", dto);
@@ -142,7 +147,7 @@ public class IndexController {
     }
 
     @GetMapping("/posts_notice/update/{id}")
-    public String posts_noticeUpdate(@PathVariable Long id, Model model, @LoginUser SessionUser user){
+    public String posts_noticeUpdate(@PathVariable Long id, Model model, @LoginUser SessionUser user) {
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
         }
@@ -151,7 +156,7 @@ public class IndexController {
         System.out.println("dto.getUuid() = " + dto.getUuid());
         System.out.println("user.getUuid() = " + user.getUuid());
 
-        if (dto.getUuid() != null && user.getUuid() != null && dto.getUuid().equals(user.getUuid())){
+        if (dto.getUuid() != null && user.getUuid() != null && dto.getUuid().equals(user.getUuid())) {
             model.addAttribute("equalUuid", user.getUuid());
         }
         model.addAttribute("post", dto);
@@ -160,7 +165,7 @@ public class IndexController {
     }
 
     @GetMapping("/posts/search")
-    public String search(String keyword, Model model){
+    public String search(String keyword, Model model) {
         List<Posts> searchList = postsService.search(keyword);
 
         model.addAttribute("searchList", searchList);
@@ -169,7 +174,7 @@ public class IndexController {
     }
 
     @GetMapping("/posts_notice/search")
-    public String noticesearch(String keyword, Model model){
+    public String noticesearch(String keyword, Model model) {
         List<Posts_notice> searchList = posts_noticeService.search(keyword);
 
         model.addAttribute("searchList", searchList);
@@ -198,7 +203,7 @@ public class IndexController {
 
 
     @GetMapping("/notice")
-    public String noticePage(Model model, @LoginUser SessionUser user, @RequestParam(defaultValue = "0") int page){
+    public String noticePage(Model model, @LoginUser SessionUser user, @RequestParam(defaultValue = "0") int page) {
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
 
@@ -210,8 +215,8 @@ public class IndexController {
         int size = 3;
         Page<Posts_notice> resultList = posts_noticeService.getPostList(page, size);
         List<PageList> arr = new ArrayList<>();
-        for (int i=0; i<resultList.getTotalPages(); i++) {
-            arr.add(new PageList(i, i+1));
+        for (int i = 0; i < resultList.getTotalPages(); i++) {
+            arr.add(new PageList(i, i + 1));
         }
         model.addAttribute("resultList", resultList);
         model.addAttribute("arr", arr);
@@ -225,10 +230,34 @@ public class IndexController {
         if (user != null) {
             model.addAttribute("loginUserName", user.getName());
         }
-        model.addAttribute("posts", postsService.findAllDesc());
+
+        List<PostsListResponseDto> posts = postsService.findAllDesc();
         List<FilesListResponseDto> firstImg = filesService.findFirstImg();
 
-        model.addAttribute("filesList", filesService.findFirstImg());
+        List<FindDto> combinedList = new ArrayList<>();
+        Map<Long, FilesListResponseDto> imgMap = firstImg.stream()
+                .collect(Collectors.toMap(FilesListResponseDto::getPostId, Function.identity()));
+
+        for (PostsListResponseDto post : posts) {
+            FilesListResponseDto img = imgMap.getOrDefault(post.getId(), null);
+
+            FindDto findDto = FindDto.builder()
+                    .id(post.getId())
+                    .title(post.getTitle())
+                    .author(post.getAuthor())
+                    .content(post.getContent())
+                    .originalFileName(img != null ? img.getOriginalFileName() : "NoImage")
+                    .savedFileName(img != null ? img.getSavedFileName() : "NoImage")
+                    .modifiedDate(post.getModifiedDate())
+                    .build();
+
+            combinedList.add(findDto);
+        }
+
+
+        model.addAttribute("posts", combinedList);
+
+
         return "nav/find";
     }
 }
