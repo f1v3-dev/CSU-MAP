@@ -29,7 +29,7 @@
 ### 5-2. 백엔드 개발
 
 ### 6. 서비스 배포
-CI/CD 파이프 라인을 구축을 위해 Githu Actions를 활용하여 AWS EC2 인스턴스 내에서 Nginx가 Spring Boot 애플리케이션을 자동으로 배포하도록 설정.
+CI/CD 파이프 라인을 구축을 위해 Githu Actions를 활용하여 AWS EC2 인스턴스 내에서 Nginx가 Spring Boot 애플리케이션을 자동으로 배포하도록 설정  
 ![image](https://github.com/f1v3-dev/springboot-webservice/assets/84575041/d46b1dca-c613-4b72-9b7d-1ea805cdaeb4)
 
 
