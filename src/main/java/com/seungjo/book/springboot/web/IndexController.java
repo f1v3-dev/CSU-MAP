@@ -3,12 +3,14 @@ package com.seungjo.book.springboot.web;
 import com.seungjo.book.springboot.config.auth.LoginUser;
 import com.seungjo.book.springboot.config.auth.dto.SessionUser;
 import com.seungjo.book.springboot.domain.file.Files;
+import com.seungjo.book.springboot.domain.it.Lectures;
 import com.seungjo.book.springboot.domain.posts.Posts;
 import com.seungjo.book.springboot.domain.posts.PostsRepository;
 import com.seungjo.book.springboot.domain.posts_notice.Posts_notice;
 import com.seungjo.book.springboot.domain.user.Role;
 import com.seungjo.book.springboot.domain.user.User;
 import com.seungjo.book.springboot.domain.user.UserRepository;
+import com.seungjo.book.springboot.service.IT.ITService;
 import com.seungjo.book.springboot.service.file.FilesService;
 import com.seungjo.book.springboot.service.posts.PostsService;
 import com.seungjo.book.springboot.service.posts_noticeService.Posts_noticeService;
@@ -26,10 +28,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.net.MalformedURLException;
 import java.util.*;
@@ -41,11 +41,12 @@ import java.util.stream.Collectors;
 public class IndexController {
 
 
+
     private final PostsService postsService;
     private final Posts_noticeService posts_noticeService;
-
     private final UserRepository userRepository;
     private final FilesService filesService;
+    private final ITService itService;
 
     private boolean isAuthenticated() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -208,43 +209,40 @@ public class IndexController {
             model.addAttribute("loginUserName", user.getName());
 
             Optional<User> userRole = userRepository.findByEmail(user.getEmail());
-            if (userRole.get().getRole() == Role.ADMIN) {
+            if (userRole.isPresent() && userRole.get().getRole() == Role.ADMIN) {
                 model.addAttribute("write", userRole.get().getRole());
             }
         }
+
         int size = 10;
         int page_size = 10;
+
         Page<Posts_notice> resultList = posts_noticeService.getPostList(page, size);
-        if (page > resultList.getTotalPages())
-            page = resultList.getTotalPages();
+        int totalPages = resultList.getTotalPages();
+        if (page > totalPages) {
+            page = totalPages;
+        }
+
         List<PageList> arr = new ArrayList<>();
-        int start = (page/page_size)*page_size;
-        int end = resultList.getTotalPages() < start+10 ? resultList.getTotalPages() : start+10;
-        for (int i=start; i<end; i++) {
-            arr.add(new PageList(i, i+1));
+        int start = (page / page_size) * page_size;
+        int end = Math.min(start + page_size, totalPages);
+        for (int i = start; i < end; i++) {
+            arr.add(new PageList(i, i + 1));
         }
         model.addAttribute("resultList", resultList);
         model.addAttribute("arr", arr);
 
-        if (start != 0) {
-            int prev = start-10;
-            model.addAttribute("hasPrev", true);
-            model.addAttribute("prev", prev);
-        }
-        else {
-            model.addAttribute("hasPrev", false);
-        }
-        if (start+10 < resultList.getTotalPages()) {
-            int next = start+10;
-            model.addAttribute("hasNext", true);
-            model.addAttribute("next", next);
-        }
-        else {
-            model.addAttribute("hasNext", false);
-        }
-        return "nav/notice";
+        int prev = start - page_size;
+        model.addAttribute("hasPrev", start != 0);
+        model.addAttribute("prev", prev);
 
+        int next = start + page_size;
+        model.addAttribute("hasNext", next < totalPages);
+        model.addAttribute("next", next);
+
+        return "nav/notice";
     }
+
 
     @GetMapping("/find")
     public String findPage(Model model, @LoginUser SessionUser user) {

@@ -25,3 +25,12 @@ CREATE TABLE SPRING_SESSION_ATTRIBUTES (
 );
 
 select * from posts;
+
+create table professor
+(
+    name varchar(20) null
+);
+
+
+
+
