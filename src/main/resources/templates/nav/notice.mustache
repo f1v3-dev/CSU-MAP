@@ -1,9 +1,17 @@
 {{>layout/header}}
 
+<style>
+
+    .pagination {
+        display: flex;
+    }
+
+
+</style>
+
 <div class="header">
     {{#write}}
-        <a href="/posts_notice/save" role="button"
-           class="btn float-right btn-primary">글 등록</a>
+        <a href="/posts_notice/save" role="button" class="btn float-right btn-primary">글 등록</a>
     {{/write}}
 
     <div class="center">
@@ -35,17 +43,6 @@
         {{/resultList}}
         </tbody>
     </table>
-    {{#hasPrev}}
-        <a href="/notice?page={{prev}}" role="button" class="btn btn-lg bi bi-caret-left-square-fill"><</a>
-    {{/hasPrev}}
-    {{#arr}}
-        <tr>
-            <a href = "/notice?page={{var1}}">{{var2}}</a>
-        </tr>
-    {{/arr}}
-    {{#hasNext}}
-        <a href="/notice?page={{next}}" role="button" class="btn btn-lg bi bi-caret-right-square-fill">></a>
-    {{/hasNext}}
 </div>
 
 <div class="center pagination-container">
@@ -69,3 +66,4 @@
 </div>
 
 {{>layout/footer_notice}}
+

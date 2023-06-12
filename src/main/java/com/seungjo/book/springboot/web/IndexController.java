@@ -280,4 +280,36 @@ public class IndexController {
 
         return "nav/find";
     }
+    //강의명(keyword)를 입력하면 강의실 정보(강의실명, 강의실 번호)출력
+    @GetMapping("/classroom-search")
+    public String classroomPage(@LoginUser SessionUser user, Model model, String keyword, RedirectAttributes redirectAttributes) {
+        if (user != null) {
+            model.addAttribute("loginUserName", user.getName());
+        }
+        String floor = "";
+
+        // 강의명(keyword)을 입력하면 강의실을 찾아준다.
+
+        // List<Lectures> classroomsByLecName = itService.findClassroomsByLec_name(keyword);
+        List<Lectures> lecturesByKeyword = itService.findLecturesByKeyword(keyword);
+        if (!lecturesByKeyword.isEmpty()) {
+            for (Lectures lectures : lecturesByKeyword) {
+                String classroomId = lectures.getClassroom_id();
+                System.out.println("classroomId = " + classroomId);
+                if (classroomId.length() == 5) {
+                    floor = "10";
+                } else {
+                    floor = String.valueOf(lectures.getClassroom_id().charAt(0));
+                }
+            }
+        } else {
+            System.out.println("DB 내에서 찾지 못했습니다.");
+        }
+
+        System.out.println("floor = " + floor);
+        redirectAttributes.addAttribute("floor", floor);
+        return "redirect:/buildings/IT/{floor}";
+
+//        return "/buildings/IT/" +  floor;
+    }
 }
