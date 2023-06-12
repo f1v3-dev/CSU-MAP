@@ -14,7 +14,7 @@
 - Intellij IDEA 2022.3.2
 - gradle 7.6.1
 - Spring Boot 2.1.7
-- 
+
 ## 개발 과정
 
 ### 1. 요구사항 분석
