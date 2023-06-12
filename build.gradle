@@ -39,5 +39,7 @@ dependencies {
     testAnnotationProcessor('org.projectlombok:lombok')
 
     implementation('org.mariadb.jdbc:mariadb-java-client')
+    // AWS SDK for Java
+//    implementation('software.amazon.awssdk:s3-transfer-manager:2.20.68')
 
 }
