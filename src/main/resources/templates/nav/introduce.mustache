@@ -1,5 +1,52 @@
 {{>layout/header}}
 <style>
+    .container.goal h1 {
+        color: #0032a0;
+    }
+
+    .image-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100%;
+    }
+
+    .left-popup,
+    .right-popup {
+        position: absolute;
+        top: -100px;
+        width: 700px;
+        height: 100px;
+        line-height: 50px;
+        padding: 10px;
+        background-color: #bdc7db;
+        border-radius: 10px;
+        opacity: 0;
+        transition: top 0.5s, opacity 0.5s;
+
+    }
+
+    .left-popup {
+        left: 250px;
+    }
+
+    .right-popup {
+        right: 250px;
+    }
+
+    .show {
+        top: 30px;
+        opacity: 0.9;
+    }
+
+    .container1 {
+        position: relative;
+        height: 1500px; /* 페이지의 전체 높이에 맞게 조정해주세요 */
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
     .container {
         max-width: 1400px;
         display: grid;
@@ -10,12 +57,6 @@
         /* background-color: #f2f2f2; */
     }
 
-    .header {
-        /* background-color: ; */
-        padding-top: 75px;
-        margin-left: 50px;
-        text-align: left;
-    }
 
     .container div {
         color: grey;
@@ -162,6 +203,7 @@
 
     window.addEventListener('scroll', animateElementsOnScroll);
     window.addEventListener('DOMContentLoaded', animateElementsOnScroll);
+
 </script>
 
 <link
@@ -172,11 +214,38 @@
         referrerpolicy="no-referrer"
 />
 
+<br>
+<div class="image-wrapper">
+    <img src="/images/map/CSU.png" alt="이미지 설명" style="width:1200px; height:auto; border-radius: 10px">
+</div>
+<br>
+<br>
+
 <div class="container csu-map show">
     <h1>What is CSU MAP?</h1>
 </div>
+<br>
+<br>
 
 <div class="container goal">
+    <h1>멀티미디어실습실이 어디인가요?
+
+    </h1>
+
+    <h1>캡스톤디자인 세미나실이 어디인가요?
+        <br>
+    </h1>
+
+    <h1>공용PC실2가 어디인가요?
+        <br>
+    </h1>
+
+
+    <br><br><br>
+    <br>
+    <br><br>
+    <br>
+
     <h2>CSU MAP이란 무엇일까요?</h2>
     <br>
     <div>

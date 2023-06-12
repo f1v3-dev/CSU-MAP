@@ -1,74 +1,71 @@
-create table building
-(
-    name        varchar(40) null,
-    building_id integer     null
-);
+--create table building
+--(
+--    name        varchar(40) null,
+--     integer     null
+--);
+--
+--INSERT INTO building (name, ) VALUES ('IT융합대학', 1);
+--INSERT INTO building (name, ) VALUES ('경상대학', 2);
+--INSERT INTO building (name, ) VALUES ('공과대학 제1공학관', 3);
+--INSERT INTO building (name, ) VALUES ('공과대학 제2공학관', 4);
+--INSERT INTO building (name, ) VALUES ('국제관', 5);
+--INSERT INTO building (name, ) VALUES ('미술대학', 6);
+--INSERT INTO building (name, ) VALUES ('법과대학', 7);
+--INSERT INTO building (name, ) VALUES ('본관', 8);
+--INSERT INTO building (name, ) VALUES ('생명공학관', 9);
+--INSERT INTO building (name, ) VALUES ('약학대학 1호관', 10);
+--INSERT INTO building (name, ) VALUES ('약학대학 2호관', 11);
+--INSERT INTO building (name, ) VALUES ('약학대학 3호관', 12);
+--INSERT INTO building (name, ) VALUES ('의과대학 1호관', 13);
+--INSERT INTO building (name, ) VALUES ('의과대학 2호관', 14);
+--INSERT INTO building (name, ) VALUES ('의과대학 3호관', 15);
+--INSERT INTO building (name, ) VALUES ('자연과학관', 16);
+--INSERT INTO building (name, ) VALUES ('조선간호대학', 17);
+--INSERT INTO building (name, ) VALUES ('체육대학', 18);
+--INSERT INTO building (name, ) VALUES ('치과대학(교육동)', 19);
+--INSERT INTO building (name, ) VALUES ('치과대학(연구동)', 20);
 
-INSERT INTO building (name, building_id) VALUES ('IT융합대학', 1);
-INSERT INTO building (name, building_id) VALUES ('경상대학', 2);
-INSERT INTO building (name, building_id) VALUES ('공과대학 제1공학관', 3);
-INSERT INTO building (name, building_id) VALUES ('공과대학 제2공학관', 4);
-INSERT INTO building (name, building_id) VALUES ('국제관', 5);
-INSERT INTO building (name, building_id) VALUES ('미술대학', 6);
-INSERT INTO building (name, building_id) VALUES ('법과대학', 7);
-INSERT INTO building (name, building_id) VALUES ('본관', 8);
-INSERT INTO building (name, building_id) VALUES ('생명공학관', 9);
-INSERT INTO building (name, building_id) VALUES ('약학대학 1호관', 10);
-INSERT INTO building (name, building_id) VALUES ('약학대학 2호관', 11);
-INSERT INTO building (name, building_id) VALUES ('약학대학 3호관', 12);
-INSERT INTO building (name, building_id) VALUES ('의과대학 1호관', 13);
-INSERT INTO building (name, building_id) VALUES ('의과대학 2호관', 14);
-INSERT INTO building (name, building_id) VALUES ('의과대학 3호관', 15);
-INSERT INTO building (name, building_id) VALUES ('자연과학관', 16);
-INSERT INTO building (name, building_id) VALUES ('조선간호대학', 17);
-INSERT INTO building (name, building_id) VALUES ('체육대학', 18);
-INSERT INTO building (name, building_id) VALUES ('치과대학(교육동)', 19);
-INSERT INTO building (name, building_id) VALUES ('치과대학(연구동)', 20);
-
-create table classroom
+create table classrooms
 (
     id          varchar(10) not null primary key,
-    name        varchar(20) null,
-    building_id int         null,
-    constraint classroom_building_building_id_fk
-        foreign key (building_id) references building (building_id)
+    name        varchar(20) null
 );
 
-INSERT INTO classroom (id, name, building_id) VALUES ('10210', '게임 제작 실습실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('10221', '멀티미디어 실습실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('10225', '프로그래밍 실습실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('1103', 'E스페이스실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('1122', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('1125', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('1209', 'SW융합교육원 PC1실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('1225', 'SW융합교육원 PC2실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('2104-2', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('2105-1', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('2105-2', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('2119', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('2122', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('2125', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('2128', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('2210', '공용PC3실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('2221', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('2225', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('2228', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('3120', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('3124', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('3128', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('3208', '공용PC1실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('3210', '공용PC2실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('3224', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('3228', null, 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('7210', '임베디드 시스템 및 소프트웨어 실습실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('7221', '네트워크 프로그래밍 실습실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('7225', '데이터베이스 프로그래밍 실습실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('8206', '통신 네트워크 실습실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('8210', '정보통신 실험실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('8221', 'PC응용 실습실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('9206', '디지털 시스템 설계 실험실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('9210', '시스템 설계 프로젝트 실험실', 1);
-INSERT INTO classroom (id, name, building_id) VALUES ('9221', '아날로그 시스템 설계 실험실', 1);
+INSERT INTO classrooms (id, name) VALUES ('10210', '게임 제작 실습실');
+INSERT INTO classrooms (id, name) VALUES ('10221', '멀티미디어 실습실');
+INSERT INTO classrooms (id, name) VALUES ('10225', '프로그래밍 실습실');
+INSERT INTO classrooms (id, name) VALUES ('1103', 'E스페이스실');
+INSERT INTO classrooms (id, name) VALUES ('1122', null);
+INSERT INTO classrooms (id, name) VALUES ('1125', null);
+INSERT INTO classrooms (id, name) VALUES ('1209', 'SW융합교육원 PC1실');
+INSERT INTO classrooms (id, name) VALUES ('1225', 'SW융합교육원 PC2실');
+INSERT INTO classrooms (id, name) VALUES ('2104-2', null);
+INSERT INTO classrooms (id, name) VALUES ('2105-1', null);
+INSERT INTO classrooms (id, name) VALUES ('2105-2', null);
+INSERT INTO classrooms (id, name) VALUES ('2119', null);
+INSERT INTO classrooms (id, name) VALUES ('2122', null);
+INSERT INTO classrooms (id, name) VALUES ('2125', null);
+INSERT INTO classrooms (id, name) VALUES ('2128', null);
+INSERT INTO classrooms (id, name) VALUES ('2210', '공용PC3실');
+INSERT INTO classrooms (id, name) VALUES ('2221', null);
+INSERT INTO classrooms (id, name) VALUES ('2225', null);
+INSERT INTO classrooms (id, name) VALUES ('2228', null);
+INSERT INTO classrooms (id, name) VALUES ('3120', null);
+INSERT INTO classrooms (id, name) VALUES ('3124', null);
+INSERT INTO classrooms (id, name) VALUES ('3128', null);
+INSERT INTO classrooms (id, name) VALUES ('3208', '공용PC1실');
+INSERT INTO classrooms (id, name) VALUES ('3210', '공용PC2실');
+INSERT INTO classrooms (id, name) VALUES ('3224', null);
+INSERT INTO classrooms (id, name) VALUES ('3228', null);
+INSERT INTO classrooms (id, name) VALUES ('7210', '임베디드 시스템 및 소프트웨어 실습실');
+INSERT INTO classrooms (id, name) VALUES ('7221', '네트워크 프로그래밍 실습실');
+INSERT INTO classrooms (id, name) VALUES ('7225', '데이터베이스 프로그래밍 실습실');
+INSERT INTO classrooms (id, name) VALUES ('8206', '통신 네트워크 실습실');
+INSERT INTO classrooms (id, name) VALUES ('8210', '정보통신 실험실');
+INSERT INTO classrooms (id, name) VALUES ('8221', 'PC응용 실습실');
+INSERT INTO classrooms (id, name) VALUES ('9206', '디지털 시스템 설계 실험실');
+INSERT INTO classrooms (id, name) VALUES ('9210', '시스템 설계 프로젝트 실험실');
+INSERT INTO classrooms (id, name) VALUES ('9221', '아날로그 시스템 설계 실험실');
 
 create table lectures
 (
@@ -80,11 +77,12 @@ create table lectures
     classroom_id varchar(10) null,
     professor    varchar(20) null,
     constraint lectures_ibfk_1
-        foreign key (classroom_id) references classroom (id)
+        foreign key (classroom_id) references classrooms (id)
 );
 
 create index classroom_id
     on lectures (classroom_id);
+
 
 INSERT INTO lectures (lec_name, division, start, end, day, classroom_id, professor) VALUES ('AI헬스케어응용1', '01', '18:00', '21:00', '월', '1103', '유희수');
 INSERT INTO lectures (lec_name, division, start, end, day, classroom_id, professor) VALUES ('AI헬스케어융합캡스톤디자인', '01', '9:00', '12:00', '목', '1103', '유희수');
