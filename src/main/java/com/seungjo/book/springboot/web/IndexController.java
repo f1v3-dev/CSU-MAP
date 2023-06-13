@@ -289,8 +289,6 @@ public class IndexController {
         String floor = "";
 
         // 강의명(keyword)을 입력하면 강의실을 찾아준다.
-
-        // List<Lectures> classroomsByLecName = itService.findClassroomsByLec_name(keyword);
         List<Lectures> lecturesByKeyword = itService.findLecturesByKeyword(keyword);
         List<LectureList> findResult = new ArrayList<>();
 
@@ -308,8 +306,5 @@ public class IndexController {
         model.addAttribute("findResult", findResult);
         return "/buildings/IT/FindResult";
 
-//        redirectAttributes.addAttribute("floor", floor);
-//        return "redirect:/buildings/IT/{floor}";
-//        return "/buildings/IT/" +  floor;
     }
 }
