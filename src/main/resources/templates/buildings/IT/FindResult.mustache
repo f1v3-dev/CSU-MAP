@@ -1,0 +1,61 @@
+{{>layout/header}}
+<style>
+    .header {
+        text-align: center;
+        margin-top: 50px;
+    }
+
+    .header h2 {
+        font-size: 24px;
+        margin-bottom: 20px;
+    }
+
+    .header ul {
+        list-style: none;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+
+    .header ul li {
+        margin-bottom: 10px;
+    }
+
+    .header ul li a {
+        color: #1A3A91;
+        text-decoration: none;
+    }
+
+    .header ul li a:hover {
+        text-decoration: underline;
+    }
+
+    .header p {
+        font-size: 18px;
+        color: #999;
+    }
+</style>
+
+
+<div class="header">
+    <div class="col-md-12">
+        <div class="container findList show">
+            <div style="margin-top: 150px;">
+                <h2>검색 결과</h2>
+                {{#findResult}}
+                    <ul>
+                        <li>
+                            <a href="/buildings/IT/{{floor}}">
+                                {{lecName}} ({{professor}}) : {{classroomId}}
+                            </a>
+                        </li>
+                    </ul>
+                {{/findResult}}
+                {{^findResult}}
+                    <p>강의에 대한 정보가 없습니다.</p>
+                {{/findResult}}
+            </div>
+        </div>
+    </div>
+</div>
+
+{{>layout/footer}}

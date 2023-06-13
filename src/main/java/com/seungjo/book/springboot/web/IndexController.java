@@ -292,24 +292,24 @@ public class IndexController {
 
         // List<Lectures> classroomsByLecName = itService.findClassroomsByLec_name(keyword);
         List<Lectures> lecturesByKeyword = itService.findLecturesByKeyword(keyword);
+        List<LectureList> findResult = new ArrayList<>();
+
         if (!lecturesByKeyword.isEmpty()) {
             for (Lectures lectures : lecturesByKeyword) {
                 String classroomId = lectures.getClassroom_id();
-                System.out.println("classroomId = " + classroomId);
                 if (classroomId.length() == 5) {
                     floor = "10";
                 } else {
                     floor = String.valueOf(lectures.getClassroom_id().charAt(0));
                 }
+                findResult.add(new LectureList(classroomId, floor, lectures.getLec_name(), lectures.getProfessor()));
             }
-        } else {
-            System.out.println("DB 내에서 찾지 못했습니다.");
         }
+        model.addAttribute("findResult", findResult);
+        return "/buildings/IT/FindResult";
 
-        System.out.println("floor = " + floor);
-        redirectAttributes.addAttribute("floor", floor);
-        return "redirect:/buildings/IT/{floor}";
-
+//        redirectAttributes.addAttribute("floor", floor);
+//        return "redirect:/buildings/IT/{floor}";
 //        return "/buildings/IT/" +  floor;
     }
 }

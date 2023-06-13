@@ -21,6 +21,8 @@ public class BuildingsController {
         }
         if(floor != null) {
             model.addAttribute("floor", floor);
+        } else {
+            model.addAttribute("floor", 1);
         }
         return "/buildings/IT/IT";
     }
