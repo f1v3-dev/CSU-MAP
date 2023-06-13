@@ -12,46 +12,48 @@
         background-color: #d8ebf0;
     }
 
-    .center img {
-        display: block;
-        margin: 0 auto;
+    /*.center img {*/
+    /*    display: block;*/
+    /*    margin: 0 auto;*/
+    /*}*/
+
+    .search-form {
+        margin-top: 0;
+        position: absolute;
+        top: 5%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 2;
     }
 
     /*포인터에 마우스 올렸을 때 주는 효과*/
     .button:hover {
         outline-color: transparent;
         outline-style: solid;
-        box-shadow: 0 0 0 4px #0032a0; /* Red border */
+        box-shadow: 0 0 0 1.5px #0032a0; /* Red border */
+        border-radius: 3px;
+        outline: 3rem;
     }
 
-    .overlay-image1 {
-        position: absolute;
-        top: -25px; /* 이미지의 세로 위치를 50px 아래로 이동 */
-        left: 75%; /* 이미지의 가로 위치를 50%로 설정 */
-        /*transform: translateX(-50%); /* 이미지를 가운데 정렬 */
-        z-index: 2;
-        width: 90px; /* 이미지의 가로 크기 조절 */
-        height: 115px; /* 이미지의 세로 크기 자동 조정 */
+    .it_cursor {
+        position: fixed;
+        top: 19%;
+        right: 16.5%;
+        transform: translate(-50%, -50%);
     }
 
-    .overlay-image2 {
-        position: absolute;
-        top: 65px; /* 이미지의 세로 위치를 50px 아래로 이동 */
-        left: 37%; /* 이미지의 가로 위치를 50%로 설정 */
-        /*transform: translateX(-50%); /* 이미지를 가운데 정렬 */
-        z-index: 2;
-        width: 80px; /* 이미지의 가로 크기 조절 */
-        height: 105px; /* 이미지의 세로 크기 자동 조정 */
+    .main_cursor {
+        position: fixed;
+        top: 35%;
+        left: 40%;
+        transform: translate(-50%, -50%);
     }
 
-    .overlay-image3 {
-        position: absolute;
-        top: 161px; /* 이미지의 세로 위치를 50px 아래로 이동 */
-        left: 780px; /* 이미지의 가로 위치를 50%로 설정 */
-        /*transform: translateX(-50%); /* 이미지를 가운데 정렬 */
-        z-index: 2;
-        width: 80px; /* 이미지의 가로 크기 조절 */
-        height: 110px; /* 이미지의 세로 크기 자동 조정 */
+    .library_cursor {
+        position: fixed;
+        top: 45%;
+        left: 49%;
+        transform: translate(-50%, -50%);
     }
 
 </style>
@@ -59,38 +61,29 @@
 <div class="header">
     <br>
     <div class="center">
-        <form action="/posts/search" method="GET" class="form-inline p-2 bd-highlight" role="search">
-            <input type="text" name="keyword" class="form-control" id="search" placeholder="검색" style="width: 300px">
-            <button class="btn btn-success bi bi-search">검색</button>
-        </form>
-    </div>
-    <div class="col-md-12">
-        <!-- 로그인 기능 영역-->
-        <div class="row">
-            <div class="col-md-12">
-                {{#loginUserName}}
-                    안녕하세요  <span id="user">{{loginUserName}} 님</span>
-                {{/loginUserName}}
-            </div>
+        <div class="search-form">
+            <form action="/posts/search" method="GET" class="form-inline p-2 bd-highlight" role="search">
+                <input type="text" name="keyword" class="form-control" id="search" placeholder="강의실명을 입력하세요."
+                       style="width: 300px">
+                <button class="btn btn-success bi bi-search">검색</button>
+            </form>
         </div>
-        <br>
-        <div class="center">
-            <!-- 인덱스 페이지 배경 이미지 태그 -->
-            <img src="/images/map/campus.png" alt="이미지_설명" style="width:1200px";>
-            <!-- 포인터 이미지 클릭시 이동하는 페이지 경로 -->
+        <div>
+            <img src="/images/map/campus.png" alt="이미지_설명" style="width: 1400px">
             <a href="/buildings/IT">
-                <!-- 배경이미지에 올라가는 포인터 이미지 태그 -->
-                <img src="/images/pointer/pointer1.png" alt="올려진_이미지" class="overlay-image1 button">
+                <img src="/images/pointer/pointer1.png" alt="올려진_이미지" class="it_cursor button">
             </a>
             <a href="/buildings/IT">
-                <!-- 배경이미지에 올라가는 포인터 이미지 태그 -->
-                <img src="/images/pointer/pointer2.png" alt="올려진_이미지" class="overlay-image2 button">
+                <!-- 본관 포인터 -->
+                <img src="/images/pointer/pointer2.png" alt="올려진_이미지" class="main_cursor button">
             </a>
             <a href="/buildings/IT">
-                <!-- 배경이미지에 올라가는 포인터 이미지 태그 -->
-                <img src="/images/pointer/pointer3.png" alt="올려진_이미지" class="overlay-image3 button">
+                <!-- 중앙도서관 포인터 -->
+                <img src="/images/pointer/pointer3.png" alt="올려진_이미지" class="library_cursor image3 button">
             </a>
         </div>
+
     </div>
+
 </div>
 {{>layout/footer}}
