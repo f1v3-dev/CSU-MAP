@@ -14,4 +14,5 @@ public interface LecturesRepository extends JpaRepository<Lectures, String> {
     @Query("SELECT l FROM Lectures l WHERE l.lec_name LIKE %:keyword%")
     List<Lectures> findLecturesByKeyword(@Param("keyword") String keyword);
 
+
 }

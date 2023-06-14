@@ -57,7 +57,12 @@
 
     <br>
     <div>
-        현재 층 수는 {{floor}}층 입니다.
+        현재 층 수는 {{floor}}층 입니다. <br>
+
+        {{#classroomList}}
+            <a href="javascript:void(0);" onclick="changeTimetableImage('{{id}}')">{{id}}</a>
+        {{/classroomList}}
+
     </div>
 
     {{#floor}}
@@ -68,6 +73,28 @@
             <img src="/images/IT/IT.png">
         </a>
     {{/floor}}
-</div>
 
+    <div id="selectedClassroomImage"></div>
+
+</div>
+<script>
+    var classroomImages = {
+        "1122": "/images/timetable/IT/1F/1122.png",
+        "1125": "/images/timetable/IT/1F/1125.png",
+        "1209": "/images/timetable/IT/1F/1209.png",
+        "1225": "/images/timetable/IT/1F/1225.png"
+        // 다른 층의 강의실 이미지 경로를 필요에 따라 추가하세요
+    };
+
+    function changeTimetableImage(classroomId) {
+        var imageSrc = classroomImages[classroomId];
+        if (imageSrc) {
+            var imageElement = document.getElementById("selectedClassroomImage");
+            imageElement.innerHTML = "<img src='" + imageSrc + "'>";
+        } else {
+            var messageElement = document.getElementById("selectedClassroomImage");
+            messageElement.innerHTML = "<p> 입력하신 강의실은 수업이 없습니다. </p>"
+        }
+    }
+</script>
 {{>layout/footer}}

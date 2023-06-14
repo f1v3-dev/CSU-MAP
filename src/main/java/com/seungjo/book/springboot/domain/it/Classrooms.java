@@ -14,4 +14,5 @@ public class Classrooms {
 
     @Column
     private String name;
+
 }

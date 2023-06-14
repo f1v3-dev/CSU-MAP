@@ -23,16 +23,16 @@ public class ITService {
         return lecturesRepository.findLecturesByKeyword(keyword);
     }
 
-    public List<Lectures> findAllClassrooms() {
-        return lecturesRepository.findAll();
+//    public List<Lectures> findAllClassrooms() {
+//        return lecturesRepository.findAllClassrooms();
+//    }
+
+    public List<Classrooms> findClassrooms(Integer floor) {
+        return classroomsRepository.findClassrooms(floor);
     }
 
     public List<Lectures> findByClassroom_id(String keyword) { //강의실 번호로 강의실 찾기
         return lecturesRepository.findByClassroom_id(keyword);
-    }
-
-    public List<Classrooms> findClassrooms(String keyword) { //강의실 이름으로 강의실 찾기
-        return classroomsRepository.findClassrooms(keyword);
     }
 
 }
