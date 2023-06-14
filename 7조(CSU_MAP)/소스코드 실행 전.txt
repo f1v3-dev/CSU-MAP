@@ -1,0 +1,4 @@
+
+1) 분실물 게시판에서 업로드 한 파일을 로컬에 저장하기 때문에 파일 경로 수정이 필요합니다.
+  1. src/main/resources/application.properties 에 들어갑니다.
+  2. file.dir=[저장할 폴더 명( ex) D:/files)]  
