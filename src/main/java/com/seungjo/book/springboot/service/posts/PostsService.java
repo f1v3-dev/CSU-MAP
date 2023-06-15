@@ -60,6 +60,7 @@ public class PostsService {
     public List<Posts> search(String keyword) {
         return postsRepository.findByTitleContaining(keyword);
     }
+
     @Transactional
     public Page<Posts> pageList(Pageable pageable) {
         return postsRepository.findAll(pageable);
