@@ -304,7 +304,6 @@ public class IndexController {
             }
         }
         model.addAttribute("findResult", findResult);
-        return "/buildings/IT/FindResult";
-
+        return "/buildings/IT/SearchResult";
     }
 }
