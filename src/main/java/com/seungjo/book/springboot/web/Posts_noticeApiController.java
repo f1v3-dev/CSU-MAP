@@ -24,7 +24,7 @@ public class Posts_noticeApiController {
         Long postId = posts_noticeService.save(requestsDto);
         filesService.storeFiles(requestsDto.getImageFiles(), postId);
         redirectAttributes.addAttribute("postId", postId);
-        return "redirect:/posts/{postId}";
+        return "redirect:/posts_notice/{postId}";
     }
 
     @PutMapping("api/v2/posts/{id}")
